@@ -33,6 +33,13 @@ async function seed() {
     }),
   ]);
 
+  await Promise.all(
+    bands.map((band) => {
+      users[0].setMember(band);
+      users[1].setMember(band);
+    })
+  );
+
   console.log(`seeded ${bands.length} users`);
 
   // Creating ModelSongs
