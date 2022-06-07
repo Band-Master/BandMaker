@@ -7,7 +7,7 @@ const Band = db.define("band", {
     allowNull: false,
   },
   bio: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
   },
 });
 
