@@ -23,7 +23,6 @@ class Routes extends Component {
           <Switch>
             <Route path="/home" component={Home} />
             <Redirect to="/home" />
-            <Route path="/upload" component={FileUpload} />
           </Switch>
         ) : (
           <Switch>
