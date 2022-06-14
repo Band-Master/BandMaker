@@ -14,8 +14,20 @@ const Line = require("./models/Line");
 
 Band.belongsToMany(User, { through: "User_Bands" });
 User.belongsToMany(Band, { through: "User_Bands", as: "member" });
+
 User.hasMany(ModelSong);
+
 Band.hasMany(Song);
+Song.belongsTo(Band);
+
+Song.hasMany(Part);
+Part.belongsTo(Song);
+
+User.hasMany(Part);
+Part.belongsTo(User);
+
+Band.hasMany(Part);
+Part.belongsTo(Band);
 
 module.exports = {
   db,

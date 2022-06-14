@@ -25,6 +25,7 @@ export const fetchUserThunk = (id) => {
     try {
       let response = await axios.get(`/api/users/${id}`);
       let user = response.data;
+      // includes user Band
       dispatch(fetchUser(user));
     } catch (err) {
       console.log(err);
