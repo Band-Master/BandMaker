@@ -1,18 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { connect } from "react-redux";
+import { fetchUserThunk } from "../store/singleUser";
 import { Link } from "react-router-dom";
-import FileUpload from "./FileUpload";
 /**
  * COMPONENT
  */
 export const Home = (props) => {
-  const { username } = props;
+  const { id } = props;
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchUserThunk(id));
+  }, []);
 
   return (
     <div>
-      <h3>Welcome, {username}</h3>
-      <Link to="/upload">New Song</Link>
-      <FileUpload />
+      <h2>Welcome, {user.username}</h2>
+      <h1>Your bands</h1>
+      <h2>
+        {user.member
+          ? user.member.map((band) => {
+              return (
+                <div>
+                  <Link to={`/bands/${band.id}`}>{band.name}</Link>
+                  <h4>Bio: {band.bio}</h4>
+                </div>
+              );
+            })
+          : () => "Create Band"}
+      </h2>
     </div>
   );
 };
@@ -22,7 +40,7 @@ export const Home = (props) => {
  */
 const mapState = (state) => {
   return {
-    username: state.auth.username,
+    id: state.auth.id,
   };
 };
 

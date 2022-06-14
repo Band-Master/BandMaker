@@ -1,8 +1,9 @@
 "use strict";
 
+// const { Sequelize } = require("sequelize/types");
 const {
   db,
-  models: { User, Band, ModelSong },
+  models: { User, Band, ModelSong, Song, Part },
 } = require("../server/db");
 
 /**
@@ -41,6 +42,59 @@ async function seed() {
   );
 
   console.log(`seeded ${bands.length} users`);
+
+  // Creating songs
+  const songs = await Promise.all([
+    Song.create({
+      title: "demo",
+      bpm: 100,
+      bandId: 1,
+    }),
+    Song.create({
+      title: "demo2",
+      bpm: 120,
+      bandId: 1,
+    }),
+  ]);
+
+  console.log(`seeded ${songs.length} songs`);
+
+  // Creating parts
+  const parts = await Promise.all([
+    Part.create({
+      name: "gat",
+      audioUrl:
+        "https://drive.google.com/file/d/1A1eliSDVsaqZRn5syCU_-i5AzhCyzSvy/view?usp=sharing",
+      songId: 1,
+      userId: 1,
+      bandId: 1,
+    }),
+    Part.create({
+      name: "bass",
+      audioUrl:
+        "https://drive.google.com/file/d/1ex0OB0jqP4gBNPgWgeTSiWoJS0jZDYBQ/view?usp=sharing",
+      songId: 1,
+      userId: 1,
+      bandId: 1,
+    }),
+    Part.create({
+      name: "drums",
+      audioUrl:
+        "https://drive.google.com/file/d/10x3MalOA_yL8pQyRYJMg90xpOqbns2vG/view?usp=sharing",
+      songId: 1,
+      userId: 1,
+      bandId: 1,
+    }),
+    Part.create({
+      name: "vox",
+      audioUrl:
+        "https://drive.google.com/file/d/1rYDqPOumLJS0jynV_7KeNaem4RlxOTaf/view?usp=sharing",
+      songId: 1,
+      userId: 1,
+      bandId: 1,
+    }),
+  ]);
+  console.log(`seeded ${parts.length} parts`);
 
   // Creating ModelSongs
   const modelSongs = await Promise.all([

@@ -5,6 +5,8 @@ import { Login, Signup } from "./components/AuthForm";
 import Home from "./components/Home";
 import FileUpload from "./components/FileUpload";
 import { me } from "./store";
+import SingleBand from "./components/SingleBand";
+import SingleSong from "./components/SingleSong";
 
 /**
  * COMPONENT
@@ -22,8 +24,9 @@ class Routes extends Component {
         {isLoggedIn ? (
           <Switch>
             <Route path="/home" component={Home} />
-            <Redirect to="/home" />
-            <Route path="/upload" component={FileUpload} />
+            {/* <Redirect to="/home" /> */}
+            <Route path="/bands/:bandId" component={SingleBand} />
+            <Route path="/songs/:songId" component={SingleSong} />
           </Switch>
         ) : (
           <Switch>

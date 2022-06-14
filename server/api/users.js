@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const {
-  models: { User, ModelSong },
+  models: { User, ModelSong, Band },
 } = require("../db");
 module.exports = router;
 
@@ -27,7 +27,7 @@ router.get("/:id", async (req, res, next) => {
       where: {
         id: req.params.id,
       },
-      include: { model: Band },
+      include: { model: Band, as: "member" },
     });
     res.json(singleUser);
   } catch (error) {
@@ -54,12 +54,18 @@ router.put("/:id", async (req, res, next) => {
   }
 });
 
-// GET /api/users/ModelSongs
-router.get("/ModelSongs", async (req, res, next) => {
+// GET /api/users/:id/ModelSongs
+router.get("/:id/ModelSongs", async (req, res, next) => {
   try {
-    const modelSongs = await ModelSong.findAll({});
-    res.json(users);
+    const modelSongs = await ModelSong.findAll({
+      where: {
+        userId: req.params.id,
+      },
+    });
+    res.json(modelSongs);
   } catch (err) {
     next(err);
   }
 });
+
+// Get /api/users
