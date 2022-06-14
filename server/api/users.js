@@ -27,7 +27,7 @@ router.get("/:id", async (req, res, next) => {
       where: {
         id: req.params.id,
       },
-      include: { model: Band },
+      include: { model: Band, as: "member" },
     });
     res.json(singleUser);
   } catch (error) {
@@ -67,3 +67,5 @@ router.get("/:id/ModelSongs", async (req, res, next) => {
     next(err);
   }
 });
+
+// Get /api/users
