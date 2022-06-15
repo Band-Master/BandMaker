@@ -1,0 +1,364 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+* {
+  box-sizing: border-box;
+}
+html {
+  min-width: 800px;
+}
+body {
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  background-color: #e3e3e3;
+}
+button {
+  background: none;
+  border: none;
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: pointer;
+}
+
+.draggable {
+  -webkit-app-region: drag;
+  user-select: none;
+}
+
+.no_drag {
+  -webkit-app-region: no-drag;
+}
+
+.hide {
+  display: none;
+}
+
+.main {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  /* overflow-x: hidden; */
+}
+
+.windowCtr {
+  display: flex;
+  background: #383838;
+  color: white;
+  padding: 2px;
+}
+
+span.appName {
+  flex: 1 1;
+}
+
+span.closeW {
+  width: 22px;
+  font-weight: bold;
+  text-align: center;
+}
+
+span.minW {
+  width: 22px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.top {
+  width: 80vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  flex-grow: 1;
+  padding-bottom: 120px;
+}
+
+.left {
+  flex: 1 1;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.right {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.graphics img {
+  border-radius: 100%;
+  box-shadow: 0 0 3px 0 hsla(0, 0%, 46.7%, 0.72);
+  height: 60vh;
+  width: 60vh;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.graphics {
+  padding: 15px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1 1;
+}
+
+header h3 {
+  font-weight: bold;
+  margin: 0;
+  padding: 10px;
+  background: #4aa9de;
+  color: white;
+}
+
+.actions {
+  background: #3a3a3a;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.actions button {
+  background: none;
+  border: none;
+  color: white;
+  -webkit-user-select: none;
+  user-select: none;
+  width: 32px;
+  height: 22px;
+  cursor: pointer;
+  margin: 0 10px;
+}
+.action_btns {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  justify-content: center;
+}
+.album_meta {
+  padding-left: 15px;
+}
+.alb_label {
+  font-size: 0.8em;
+}
+.playlist {
+  background: #e3e3e3;
+  flex: 1 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.selected {
+  background: white;
+}
+
+.playlist .header {
+}
+
+.songContainer {
+  cursor: pointer;
+  user-select: none;
+}
+
+.pltext {
+  padding: 5px;
+}
+
+.loi {
+  margin: 0 auto;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1;
+  padding: 0;
+  width: 70vw;
+}
+
+.loi li {
+  margin: 2px;
+  font-weight: 450;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.loi li:hover {
+  background-color: #dfdfdf;
+}
+.tmbn_song {
+  height: 65px;
+  width: 65px;
+  background: url("https://freemusicarchive.org/image?file=images%2Falbums%2FSkidmore_College_Orchestra_-_Mussorgskys_Pictures_at_an_Exhibition_-_2009113013701972.jpg&width=290&height=290&type=image");
+  background-size: contain;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.songlist {
+  overflow-y: auto;
+}
+.songmeta {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1;
+}
+.songname {
+  padding: 0 10px;
+  font-weight: 600;
+  font-size: 1.125rem;
+}
+.songauthors {
+  padding: 0 10px;
+  font-weight: normal;
+  color: #555;
+  font-size: 0.875rem;
+}
+.song_duration {
+  color: #555;
+}
+.fav_song {
+  color: red;
+  margin-right: 5px;
+}
+
+.controls {
+  display: flex;
+  flex-direction: row;
+  height: 110px;
+  background: #3a3a3a;
+  color: white;
+  align-items: center;
+  width: 100vw;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+.vlme {
+  display: flex;
+  align-content: center;
+  overflow: hidden;
+  width: 25px;
+  transition: all 500ms;
+  position: absolute;
+  left: 0;
+}
+
+.vlme:hover {
+  width: 90px;
+}
+
+.volum {
+  padding: 10px;
+}
+
+#volBar {
+  padding: 0;
+  margin: 0;
+  width: 50px;
+  background: transparent;
+}
+
+#volBar::-moz-range-thumb {
+  height: 10px;
+  width: 3px;
+  background: #2a6586;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.musicControls {
+  margin-left: 90px;
+  min-width: 120px;
+}
+
+.musicControls span {
+  cursor: pointer;
+}
+
+.musicControls span:hover {
+  color: #2a6586;
+}
+
+.play {
+  background: #4aa9de;
+  padding: 15px 18px;
+  border-radius: 100%;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
+  position: relative;
+  z-index: 3;
+}
+
+.play:active {
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+.play:hover {
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.4);
+}
+
+.prev {
+  background: #4aa9de;
+  border-radius: 10px 0 0px 10px;
+  padding-left: 15px;
+  padding-right: 10px;
+  margin-right: -5px;
+  z-index: 1;
+}
+
+.next {
+  background: #4aa9de;
+  border-radius: 0px 10px 10px 0px;
+  padding-right: 15px;
+  padding-left: 10px;
+  margin-left: -5px;
+  z-index: 1;
+}
+
+.progressb {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 20px;
+  flex: 1;
+}
+.songMeta {
+  width: 25vw;
+}
+.songtitle {
+  display: block;
+  font-size: 1.125em;
+  font-weight: 600;
+}
+.songartistName {
+  font-size: 0.8em;
+}
+#prgbar {
+  background: transparent;
+  width: 100%;
+}
+
+.plsoptions {
+  display: flex;
+  justify-content: space-evenly;
+  width: 10vw;
+}
+
+.plsoptions span {
+  cursor: pointer;
+}
+
+.plsoptions span:hover {
+  color: #2a6586;
+}
+
+.plsoptions span.active {
+  color: rgb(32, 77, 104);
+}
+
+.currentT,
+.totalT {
+  width: 35px;
+  margin: 0 10px;
+}

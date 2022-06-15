@@ -14,10 +14,16 @@ const SingleBand = (props) => {
   return (
     <div>
       <h1>{band.name}</h1>
-      <h3>
-        Members... need to make api route and thunk. use magic method for
-        through table?
-      </h3>
+      <h1>Members</h1>
+      {band.users
+        ? band.users.map((user) => {
+            return (
+              <div>
+                <h3>{user.username}</h3>
+              </div>
+            );
+          })
+        : null}
       <h1>Songs</h1>
       {band.songs
         ? band.songs.map((song) => {

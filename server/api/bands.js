@@ -23,7 +23,7 @@ router.get("/:bandId", async (req, res, next) => {
       where: {
         id: req.params.bandId,
       },
-      include: [Song, { model: Part, include: [User] }],
+      include: [Song, { model: Part, include: [User] }, { model: User }],
     });
     res.json(band);
   } catch (err) {
