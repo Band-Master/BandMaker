@@ -6,12 +6,14 @@ import auth from "./auth";
 import singleUser from "./singleUser";
 import singleBand from "./singleBand";
 import singleSong from "./singleSong";
+import playerReducer from "./player/playerReducer";
 
 const reducer = combineReducers({
   auth: auth,
   user: singleUser,
   band: singleBand,
   song: singleSong,
+  player: playerReducer,
 });
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))

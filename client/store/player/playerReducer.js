@@ -4,7 +4,8 @@ import {
   TOGGLE_RANDOM,
   TOGGLE_REPEAT,
   TOGGLE_PLAYING,
-} from "./player/types";
+  SET_PARTS_ARRAY,
+} from "./types";
 
 const initialState = {
   song: {},
@@ -16,37 +17,22 @@ const initialState = {
   audio: null,
 };
 
-const FetchSong = "FETCH_SONG";
-const DeleteSong = "DELETE_SONG";
-const UpdateSong = "UPDATE_SONG";
-
-//this page is for admin control of user
-
-export const fetchSong = (song) => {
-  return { type: FetchSong, song };
+//action creator for parts list
+export const partsListAction = (parts) => {
+  return { type: SET_CURRENT_PART, data: parts };
 };
 
-export const deleteSong = (song) => {
-  return { type: DeleteSong, song };
-};
-
-export const updateSong = (song) => {
-  return { type: UpdateSong, song };
-};
-
-export const fetchSongThunk = (id) => {
+// Thunks
+// Set parts array
+export const setPartsThunk = (songId) => {
   return async function (dispatch) {
     try {
-      let response = await axios.get(`/api/songs/${id}`);
-      let song = response.data;
-      // includes Songs, Parts, and Users as Members
-      dispatch(fetchSong(song));
-    } catch (err) {
-      console.log(err);
-    }
+      const response = await axios.get(`/api/songs/${songId}`);
+      const parts = response.parts;
+      dispatch(partsListAction(parts));
+    } catch (error) {}
   };
 };
-
 // Set playing state
 export const togglePlaying = () => {
   return function (dispatch) {
@@ -108,46 +94,33 @@ export const handleEnd = () => {
   }
 };
 
-export const updateSongThunk = (song) => {
-  return async function (dispatch) {
-    try {
-      let response = await axios.put(`/api/songs/${song.id}`, song);
-      let newSong = response.data;
-      dispatch(updateSong(newSong));
-    } catch (err) {
-      console.log(err);
-    }
-  };
-};
-
-export default function songReducer(state = initialState, action) {
+export default function playerReducer(state = initialState, action) {
   switch (action.type) {
-    case FetchSong:
-      state.song = action.song;
-      state.parts = action.song.parts
-      return {...state};
-    case DeleteSong:
-      return initialState;
-    case UpdateSong:
-      state.song = action.song;
-      state.parts = action.song.parts
-      return {...state};
-    case SET_CURRENT_PART:
-      state.currentPart = action.data;
-      state.playing = true;
-      return {...state};
-    case TOGGLE_RANDOM:
-      state.random = action.data
-      return {...state};
-    case TOGGLE_REPEAT:
-      state.action = action.data;
+    case SET_PARTS_ARRAY:
       return {
-        ...state
+        ...state,
+        parts: action.data,
+      };
+    case SET_CURRENT_PART:
+      return {
+        ...state,
+        currentPart: action.data,
+        playing: true,
+      };
+    case TOGGLE_RANDOM:
+      return {
+        ...state,
+        random: action.data,
+      };
+    case TOGGLE_REPEAT:
+      return {
+        ...state,
+        repeat: action.data,
       };
     case TOGGLE_PLAYING:
-      state.playing = action.data;
       return {
-        ...state
+        ...state,
+        playing: action.data,
       };
     default:
       return state;
