@@ -11,7 +11,7 @@ const SingleSong = (props) => {
   useEffect(() => {
     const songId = props.match.params.songId;
     dispatch(fetchSongThunk(songId));
-  }, []);
+  }, [currentPart]);
   console.log(song);
   return (
     <div>
