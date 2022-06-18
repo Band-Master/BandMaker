@@ -64,7 +64,7 @@ async function seed() {
     Part.create({
       name: "gat",
       audioUrl:
-        "https://drive.google.com/file/d/1A1eliSDVsaqZRn5syCU_-i5AzhCyzSvy/view?usp=sharing",
+      "https://storage.googleapis.com/juke-1379.appspot.com/juke-music/Dexter%20Britain/Creative%20Commons%20Volume%202/01%20The%20Tea%20Party.mp3",
       songId: 1,
       userId: 1,
       bandId: 1,
@@ -72,7 +72,7 @@ async function seed() {
     Part.create({
       name: "bass",
       audioUrl:
-        "https://drive.google.com/file/d/1ex0OB0jqP4gBNPgWgeTSiWoJS0jZDYBQ/view?usp=sharing",
+      "https://beardbarnmusicbucket.s3.amazonaws.com/The+Wild+Horse",
       songId: 1,
       userId: 1,
       bandId: 1,
@@ -80,7 +80,7 @@ async function seed() {
     Part.create({
       name: "drums",
       audioUrl:
-        "https://drive.google.com/file/d/10x3MalOA_yL8pQyRYJMg90xpOqbns2vG/view?usp=sharing",
+      "https://storage.googleapis.com/juke-1379.appspot.com/juke-music/Dexter%20Britain/Creative%20Commons%20Volume%202/02%20After%20Christmas.mp3",
       songId: 1,
       userId: 1,
       bandId: 1,
@@ -88,7 +88,7 @@ async function seed() {
     Part.create({
       name: "vox",
       audioUrl:
-        "https://drive.google.com/file/d/1rYDqPOumLJS0jynV_7KeNaem4RlxOTaf/view?usp=sharing",
+      "https://storage.googleapis.com/juke-1379.appspot.com/juke-music/Dexter%20Britain/Creative%20Commons%20Volume%202/05%20Seeing%20The%20Future.mp3",
       songId: 1,
       userId: 1,
       bandId: 1,
