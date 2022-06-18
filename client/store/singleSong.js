@@ -1,10 +1,5 @@
 import axios from "axios";
-import {
-  SET_CURRENT_PART,
-  TOGGLE_RANDOM,
-  TOGGLE_REPEAT,
-  TOGGLE_PLAYING,
-} from "./player/types";
+
 
 const initialState = {
   song: {},
@@ -19,6 +14,11 @@ const initialState = {
 const FetchSong = "FETCH_SONG";
 const DeleteSong = "DELETE_SONG";
 const UpdateSong = "UPDATE_SONG";
+const SET_CURRENT_PART = "SET_CURRENT_PART";
+const TOGGLE_RANDOM = "TOGGLE_RANDOM";
+const TOGGLE_REPEAT = "TOGGLE_REPEAT";
+const TOGGLE_PLAYING = "TOGGLE_PLAYING";
+
 
 //this page is for admin control of user
 

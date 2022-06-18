@@ -1,54 +1,49 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSongThunk, SetCurrent } from "../store/singleSong";
-import Controls from "./playBack/Controls";
+import PartPlayBack from "./PartPlayBack";
+import {BsFillPlayCircleFill, BsFillPauseCircleFill} from 'react-icons/bs';
 
 
 const SingleSong = (props) => {
+  const [isSongPlaying, setIsSongPlaying] = useState(false);
+  const {parts} = useSelector((state) => state.song);
   const song = useSelector((state) => state.song);
-  const { currentPart, parts } = song
+
+  const PlayPause = ()=>
+  {
+    setIsSongPlaying(!isSongPlaying);
+
+  }
+
   const dispatch = useDispatch();
   useEffect(() => {
     const songId = props.match.params.songId;
     dispatch(fetchSongThunk(songId));
-  }, [currentPart]);
-  console.log(song);
+  }, []);
+
+  console.log("parts",parts, "title", song.song.title, "song", song);
+
   return (
     <div>
-      <h1>{song.title}</h1>
+      <h1>{song.song.title}</h1>
       <h2>Parts</h2>
       <ul className="loi">
-        {parts
-          ? parts.map((part, i) => (
-              <li
-                className={
-                  "songContainer " + (currentPart === i ? "selected" : "")
-                }
-                key={i}
-                onClick={() => {
-                  dispatch(SetCurrent(i));
-                }}
-              >
-                <div className="tmbn_song">
-                  <i className="fas fa-play"></i>
-                </div>
-                <div className="songmeta_playlist">
-                  <span className="songname">{part.name}</span>
-                  <span className="songauthors">Artist:{part.userId}</span>
-                </div>
-                <div className="playlist_btns_group">
-                  <button className="fav_song playlist_btn">
-                    <i className="far fa-heart fa-lg"></i>
-                  </button>
-                  <button className="options_song playlist_btn">
-                    <i className="fas fa-ellipsis-v fa-lg"></i>
-                  </button>
-                </div>
-              </li>
-            ))
-            : null}
-            {parts ? <Controls props={song} /> : null}
+        {parts.length
+          ? parts.map((part) => <PartPlayBack part={part} key={part.id} isSongPlaying={isSongPlaying}/>) 
+          : null}
+        {parts.length ?
+          <div className='player_container'>
+            <div className="title">
+              <p>{song.song.title}</p>
+            </div>
+            <div className="controls">
+              {isSongPlaying ? <BsFillPauseCircleFill className='btn_action pp' onClick={PlayPause}/> : <BsFillPlayCircleFill className='btn_action pp' onClick={PlayPause}/>}     
+            </div>
+          </div>
+         : null}
       </ul>
+      
     </div>
   );
 };

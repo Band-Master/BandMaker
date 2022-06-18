@@ -289,7 +289,7 @@ header h3 {
 }
 
 .loi {
-  margin: 0 auto;
+  margin: auto;
   list-style: none;
   display: flex;
   flex-direction: column;
