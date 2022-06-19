@@ -17,9 +17,8 @@ const PartPlayer = ({audioElem, isplaying, setisplaying, part, currentPart})=> {
   {
     let width = clickRef.current.clientWidth;
     const offset = e.nativeEvent.offsetX;
-
     const divprogress = offset / width * 100;
-    audioElem.current.currentTime = divprogress / 100 * currentPart.length;
+    audioElem.current.currentTime = divprogress / 100 * audioElem.current.duration;
 
   }
 

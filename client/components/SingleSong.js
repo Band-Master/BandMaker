@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchSongThunk, SetCurrent } from "../store/singleSong";
+import { fetchSongThunk } from "../store/singleSong";
 import PartPlayBack from "./PartPlayBack";
 import {BsFillPlayCircleFill, BsFillPauseCircleFill} from 'react-icons/bs';
 

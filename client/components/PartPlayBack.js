@@ -17,8 +17,11 @@ const PartPlayBack = ({part, isSongPlaying}) => {
     }
   }, [isplaying])
 
+
   useEffect(() => {
     if (isSongPlaying) {
+      console.log("audioElem", audioElem);
+      audioElem.current.currentTime = 0;
       setisplaying(true);
     } else {
       setisplaying(false);
