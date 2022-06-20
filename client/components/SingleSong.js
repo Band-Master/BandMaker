@@ -1,19 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useStopwatch } from 'react-timer-hook';
 import { fetchSongThunk } from "../store/singleSong";
 import PartPlayBack from "./PartPlayBack";
-import {BsFillPlayCircleFill, BsFillPauseCircleFill} from 'react-icons/bs';
+import {BsFillPlayCircleFill, BsFillPauseCircleFill, BsFillReplyFill} from 'react-icons/bs';
 
 
 const SingleSong = (props) => {
-  const [isSongPlaying, setIsSongPlaying] = useState(false);
   const {parts} = useSelector((state) => state.song);
   const song = useSelector((state) => state.song);
+  const {
+    seconds,
+    minutes,
+    isRunning,
+    start,
+    pause,
+    reset,
+  } = useStopwatch({ autoStart: false, offsetTimestamp: 0 });
+  const [duration, setDuration] = useState(300)
 
-  const PlayPause = ()=>
+  const clickRef = useRef();
+
+  const checkWidth = (e)=>
   {
-    setIsSongPlaying(!isSongPlaying);
-
+    let width = clickRef.current.clientWidth;
+    const offset = e.nativeEvent.offsetX;
+    const divprogress = offset / width * 100;
+    const time = new Date();
+    time.setSeconds(time.getSeconds() + (divprogress / 100 * duration));
+    reset(time, false);
+    console.log(time);
   }
 
   const dispatch = useDispatch();
@@ -22,28 +38,36 @@ const SingleSong = (props) => {
     dispatch(fetchSongThunk(songId));
   }, []);
 
-  console.log("parts",parts, "title", song.song.title, "song", song);
 
   return (
-    <div>
-      <h1>{song.song.title}</h1>
-      <h2>Parts</h2>
+    <div className="songs_container">
+      <div style={{fontSize: '60px'}}>{song.song.title}</div>
       <ul className="loi">
-        {parts.length
-          ? parts.map((part) => <PartPlayBack part={part} key={part.id} isSongPlaying={isSongPlaying}/>) 
-          : null}
         {parts.length ?
-          <div className='player_container'>
-            <div className="title">
-              <p>{song.song.title}</p>
+          <div className='song_container'>
+            <div style={{fontSize: '30px'}}>
+              <p>main</p>
             </div>
-            <div className="controls">
-              {isSongPlaying ? <BsFillPauseCircleFill className='btn_action pp' onClick={PlayPause}/> : <BsFillPlayCircleFill className='btn_action pp' onClick={PlayPause}/>}     
+            <div className="navigation">
+              <div className="navigation_wrapper" onClick={checkWidth} ref={clickRef}>
+                <div className="seek_bar" style={{width: `${seconds+"%"}`}}></div>
+              </div>
+                <div className="controls_wrapper">
+                  <div style={{fontSize: '80px'}}>
+                    <span>{minutes}</span>:<span>{seconds}</span>
+                  </div>
+                  {isRunning ? <BsFillPauseCircleFill className='btn_action pp' onClick={pause}/> : <BsFillPlayCircleFill className='btn_action pp' onClick={start}/>} 
+                  <BsFillReplyFill className='btn_action pp' onClick={reset} />
+                </div>
             </div>
           </div>
          : null}
+        </ul>
+      <ul className="loi">
+        {parts.length
+          ? parts.map((part) => <PartPlayBack part={part} key={part.id} isRunning={isRunning} seconds={seconds}/>) 
+          : null}
       </ul>
-      
     </div>
   );
 };

@@ -12,7 +12,7 @@ const SingleBand = (props) => {
     dispatch(fetchBandThunk(bandId));
   }, []);
   return (
-    <div>
+    <div className="App">
       <h1>{band.name}</h1>
       <h1>Members</h1>
       {band.users
