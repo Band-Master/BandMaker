@@ -2,7 +2,7 @@ import './App.css';
 import PartPlayer from './Player/PartPlayer.jsx';
 import React,{ useRef, useState, useEffect } from 'react';
 
-const PartPlayBack = ({part, isSongPlaying}) => {
+const PartPlayBack = ({part, isRunning, seconds}) => {
   const [isplaying, setisplaying] = useState(false);
   const [currentPart, setCurrentPart] = useState(part);
 
@@ -19,21 +19,25 @@ const PartPlayBack = ({part, isSongPlaying}) => {
 
 
   useEffect(() => {
-    if (isSongPlaying) {
-      console.log("audioElem", audioElem);
-      audioElem.current.currentTime = 0;
+    if (isRunning) {
+      audioElem.current.currentTime = seconds;
       setisplaying(true);
     } else {
       setisplaying(false);
     }
-  }, [isSongPlaying])
+  }, [isRunning])
 
   const onPlaying = () => {
-    const duration = audioElem.current.duration;
-    const ct = audioElem.current.currentTime;
-
-    setCurrentPart({ ...currentPart, "progress": ct / duration * 100, "length": duration })
-
+    if(isRunning) {
+      const duration = audioElem.current.duration;
+      const ct = seconds
+      setCurrentPart({ ...currentPart, "progress": ct / duration * 100, "length": duration })
+    }
+    if(!isRunning) {
+      const duration = audioElem.current.duration;
+      const ct = audioElem.current.currentTime;
+      setCurrentPart({ ...currentPart, "progress": ct / duration * 100, "length": duration })
+    }
   }
 
 
