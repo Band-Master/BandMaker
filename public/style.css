@@ -308,6 +308,13 @@ header h3 {
 .loi li:hover {
   background-color: #dfdfdf;
 }
+
+.loi img {
+  height: 200px;
+  width: 200px;
+  transition: box-shadow 0.5s ease;
+  border-radius: 3px;
+}
 .tmbn_song {
   height: 65px;
   width: 65px;
