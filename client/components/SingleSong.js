@@ -4,6 +4,7 @@ import { useStopwatch } from 'react-timer-hook';
 import { fetchSongThunk } from "../store/singleSong";
 import PartPlayBack from "./PartPlayBack";
 import {BsFillPlayCircleFill, BsFillPauseCircleFill, BsFillReplyFill} from 'react-icons/bs';
+import PartForm from './PartForm';
 
 
 const SingleSong = (props) => {
@@ -67,6 +68,7 @@ const SingleSong = (props) => {
         {parts.length
           ? parts.map((part) => <PartPlayBack part={part} key={part.id} isRunning={isRunning} seconds={seconds}/>) 
           : null}
+        {song ? <PartForm song={song} /> : null}
       </ul>
     </div>
   );

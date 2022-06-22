@@ -1,24 +1,21 @@
-const express = require("express");
-const fileUpload = require("express-fileupload");
+const router = require("express").Router();
+const {
+  models: { Part },
+} = require("../db");
 module.exports = router;
-const app = express();
 
-app.use(fileUpload());
-
-// Upload Endpoint
-app.post("/upload", (req, res) => {
-  if (req.files === null) {
-    return res.status(400).json({ msg: "No file uploaded" });
-  }
-
-  const file = req.files.file;
-
-  file.mv(`${__dirname}/client/public/uploads/${file.name}`, (err) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).send(err);
+// POST /api/parts/add/:songId/:userId/:bandId
+router.post("/add/:songId/:userId/:bandId", async (req, res, next) => {
+  try {
+    const part = {
+      name: req.body.name,
+      audioUrl: req.body.audioUrl,
+      songId: req.params.songId,
+      userId: req.params.userId,
+      bandId: req.params.bandId,
     }
-
-    res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
-  });
+    res.status(201).send(await Part.create(part));
+  } catch (error) {
+    next(error);
+  }
 });

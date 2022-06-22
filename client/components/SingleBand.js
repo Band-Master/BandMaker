@@ -7,10 +7,10 @@ const SingleBand = (props) => {
   const band = useSelector((state) => state.band);
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log(props);
     const bandId = props.match.params.bandId;
     dispatch(fetchBandThunk(bandId));
   }, []);
+  console.log("band", band);
   return (
     <div className="App">
       <h1>{band.name}</h1>
