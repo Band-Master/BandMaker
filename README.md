@@ -26,6 +26,8 @@ Sync and seed your database by running `npm run seed`. Running `npm run start:de
 - start:dev:logger is the same as start:dev, but you will see your SQL queries (can be helpful for debugging)
 - start:dev:seed will start your server and also seed your database (this is useful when you are making schema changes and you don't want to run your seed script separately)
 
+- to access a user with a seeded demo song; login with the following: username: "cody" password: "123". The preseeded demo song is under the band, Acid Patch Kids. I am still working through the configuration process for uploading an audio file to firestore and retrieving a working URL.
+
 ### Heroku
 
 1.  Set up the [Heroku command line tools][heroku-cli]
