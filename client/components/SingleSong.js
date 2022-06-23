@@ -10,6 +10,7 @@ import PartForm from './PartForm';
 const SingleSong = (props) => {
   const {parts} = useSelector((state) => state.song);
   const song = useSelector((state) => state.song);
+  const [submit, setSubmit] = useState(false);
   const {
     seconds,
     minutes,
@@ -37,7 +38,7 @@ const SingleSong = (props) => {
   useEffect(() => {
     const songId = props.match.params.songId;
     dispatch(fetchSongThunk(songId));
-  }, []);
+  }, [submit]);
 
 
   return (
@@ -68,7 +69,7 @@ const SingleSong = (props) => {
         {parts.length
           ? parts.map((part) => <PartPlayBack part={part} key={part.id} isRunning={isRunning} seconds={seconds}/>) 
           : null}
-        {song ? <PartForm song={song} /> : null}
+        {song ? <PartForm setSubmit={setSubmit} submit={submit} /> : null}
       </ul>
     </div>
   );

@@ -1,50 +1,44 @@
 import React, {useEffect, useState} from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { useForm } from 'react-hook-form';
 import { baseApp } from '../base';
 import 'firebase/firestore';
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage"
 import { addPartThunk } from '../store/singleSong';
 
-const PartForm = () => {
+const PartForm = ({ setSubmit, submit }) => {
     const [audioUrl, setAudioUrl] = useState(null);
-    const [name, setName] = useState(null);
-    const { register, handleSubmit } = useForm();
+    const [partName, setPartName] = useState(null);
     const { id } = useSelector((state) => state.auth);
     const song = useSelector((state) => state.song);
 
-    const handleChange = (evt) => {
-        setName(evt.target.value);
-    }
-
-
-    const onSubmit = async (data) => {
-        await data;
-        console.log(data);
-        const storage = getStorage();
-        const storageRef = ref(storage, data.audio[0].name);
-        uploadBytes(storageRef, data).then((snapshop) => {
-            console.log('file uploaded, data');
-            getDownloadURL(storageRef).then((url) => {
-                setAudioUrl(url);
-            })
-        });
+    const onFileChange = async (e) => {
+        const file = e.target.files[0];
+        const storageRef = baseApp.storage().ref();
+        const fileRef = storageRef.child(file.name);
+        await fileRef.put(file);
+        setAudioUrl(await fileRef.getDownloadURL());
     };
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        if(audioUrl) {
+            setPartName(e.target.name.value)
+        }
+    }
     
     const dispatch = useDispatch();
     useEffect(() => {
         console.log("audioUrl", audioUrl, "song", song);
-        if(audioUrl) {
-            dispatch(addPartThunk({name: name, audioUrl: audioUrl, songId: song.song.id, bandId: song.song.bandId, userId: id}));
+        if(audioUrl && partName) {
+            dispatch(addPartThunk({name: partName, audioUrl: audioUrl, songId: song.song.id, bandId: song.song.bandId, userId: id}));
+            setSubmit(!submit);
         }
-    }, [audioUrl]);
+    }, [partName]);
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={onSubmit}>
             <label>upload audio</label>
-            <input {...register('audio', { required: true })} type="file" />
-            <label>Part Name</label>
-            <input value={name} onChange={handleChange}/>
+            <input type="file" onChange={onFileChange} />
+            <input type="text" name='name' placeholder='Part Name'/>
             <button className='btn_action pp'>Submit</button>
         </form>
     );
