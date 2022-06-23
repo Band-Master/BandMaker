@@ -1,38 +1,27 @@
 import React, {useEffect, useState} from 'react';
 import { useDispatch } from "react-redux";
-import { useForm } from 'react-hook-form';
 import { baseApp } from '../base';
 import 'firebase/firestore';
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage"
 import { updateUserThunk } from '../store/singleUser';
 
 const ImgForm = ({ user }) => {
     const [imgUrl, setImgUrl] = useState(null);
-    const { register, handleSubmit } = useForm();
+    const [load, setLoad] = useState(false)
 
-
-    const onSubmit = (data) => {
-        const storage = getStorage();
-        const storageRef = ref(storage, data.picture[0].name);
-        let file = new Blob(
-            [data],
-            {type: "image.*"}
-        )
-        uploadBytes(storageRef, file).then((snapshop) => {
-            // console.log('data', data, 'storageRef', storageRef, 'storage', storage);
-            getDownloadURL(storageRef).
-            then((url) => {
-                // let file = new Blob(
-                //     [url],
-                //     { type: "image.*" }
-                // )
-                // let newFile = new File([file], data.picture[0].name, {type: "image.*"})
-                // setImgUrl(newFile);
-                console.log(snapshop);
-                setImgUrl(url);
-            })
-        });
+    const onFileChange = async (e) => {
+        const file = e.target.files[0];
+        const storageRef = baseApp.storage().ref();
+        const fileRef = storageRef.child(file.name);
+        await fileRef.put(file);
+        setImgUrl(await fileRef.getDownloadURL());
     };
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        if(imgUrl) {
+            setLoad(true);
+        }
+    }
 
     const dispatch = useDispatch();
     useEffect(() => {
@@ -40,11 +29,11 @@ const ImgForm = ({ user }) => {
             console.log('imgurl', imgUrl);
             dispatch(updateUserThunk({...user, imgUrl: imgUrl}));
         }
-    }, [imgUrl]);
+    }, [load]);
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-        <input {...register('picture', { required: true })} type="file" />
+        <form onSubmit={onSubmit}>
+        <input type="file" onChange={onFileChange}/>
         <button className='btn_action pp'>Submit</button>
       </form>
     );

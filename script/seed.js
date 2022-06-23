@@ -64,7 +64,7 @@ async function seed() {
     Part.create({
       name: "gat",
       audioUrl:
-      "https://storage.googleapis.com/juke-1379.appspot.com/juke-music/Dexter%20Britain/Creative%20Commons%20Volume%202/01%20The%20Tea%20Party.mp3",
+      "https://firebasestorage.googleapis.com/v0/b/band-maker-d5da5.appspot.com/o/gat.mp3?alt=media&token=f6531179-38bb-4e02-a269-948809dfd838",
       songId: 1,
       userId: 1,
       bandId: 1,
@@ -72,7 +72,7 @@ async function seed() {
     Part.create({
       name: "bass",
       audioUrl:
-      "https://beardbarnmusicbucket.s3.amazonaws.com/The+Wild+Horse",
+      "https://firebasestorage.googleapis.com/v0/b/band-maker-d5da5.appspot.com/o/bass.mp3?alt=media&token=dbc57af8-51b6-4e89-b7e2-11acca2d8884",
       songId: 1,
       userId: 1,
       bandId: 1,
@@ -80,7 +80,7 @@ async function seed() {
     Part.create({
       name: "drums",
       audioUrl:
-      "https://storage.googleapis.com/juke-1379.appspot.com/juke-music/Dexter%20Britain/Creative%20Commons%20Volume%202/02%20After%20Christmas.mp3",
+      "https://firebasestorage.googleapis.com/v0/b/band-maker-d5da5.appspot.com/o/drums.mp3?alt=media&token=1cbe98bd-c622-4b41-b401-c3a572fc6c00",
       songId: 1,
       userId: 1,
       bandId: 1,
@@ -88,7 +88,7 @@ async function seed() {
     Part.create({
       name: "vox",
       audioUrl:
-      "https://storage.googleapis.com/juke-1379.appspot.com/juke-music/Dexter%20Britain/Creative%20Commons%20Volume%202/05%20Seeing%20The%20Future.mp3",
+      "https://firebasestorage.googleapis.com/v0/b/band-maker-d5da5.appspot.com/o/vox.mp3?alt=media&token=d80d8282-020a-4d35-b73b-c7840a4798ee",
       songId: 1,
       userId: 1,
       bandId: 1,
