@@ -24,6 +24,7 @@ const SingleBand = (props) => {
             );
           })
         : null}
+        <Link to={`/bands/${band.id}/addMembers`}>Add Members</Link>
       <h1>Songs</h1>
       {band.songs
         ? band.songs.map((song) => {

@@ -6,6 +6,8 @@ import Home from "./components/Home";
 import { me } from "./store";
 import SingleBand from "./components/SingleBand";
 import SingleSong from "./components/SingleSong";
+import AddBand from "./components/AddBand";
+import AddMembers from "./components/AddMembers";
 
 /**
  * COMPONENT
@@ -24,7 +26,9 @@ class Routes extends Component {
           <Switch>
             <Route path="/home" component={Home} />
             {/* <Redirect to="/home" /> */}
-            <Route path="/bands/:bandId" component={SingleBand} />
+            <Route exact path="/bands/:bandId" component={SingleBand} />
+            <Route path="/bands/:bandId/addMembers" component={AddMembers} />
+            <Route path="/addBand" component={AddBand} />
             <Route path="/songs/:songId" component={SingleSong} />
           </Switch>
         ) : (

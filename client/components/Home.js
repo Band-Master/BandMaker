@@ -15,25 +15,24 @@ export const Home = (props) => {
 
   useEffect(() => {
     dispatch(fetchUserThunk(id));
-  }, [id, user.imgUrl]);
-
+  }, []);
+  
   return (
     <div className="loi">
-      <h2>Welcome, {user.username}</h2>
-      {user.imgUrl ? <img src={user.imgUrl}/> : <ImgForm user={user}/>}
-      <h1>Your bands</h1>
-      <h2>
-        {user.member
-          ? user.member.map((band) => {
-              return (
-                <div key={band.id}>
-                  <Link to={`/bands/${band.id}`}>{band.name}</Link>
-                  <h4>Bio: {band.bio}</h4>
-                </div>
-              );
-            })
-          : () => "Create Band"}
-      </h2>
+        <h2>Welcome, {user.username}</h2>
+        {user.imgUrl ? <img src={user.imgUrl}/> : <ImgForm user={user}/>}
+        {user.member == [] ?
+        <h1>Your bands</h1> : <Link to={`/addBand`}>Create Band</Link>
+        }
+        {user.member ? user.member.map((band) => {
+          return (
+            <div key={band.id}>
+              <Link to={`/bands/${band.id}`}>{band.name}</Link>
+              <h4>Bio: {band.bio}</h4>
+            </div>
+          );
+        })
+      : null}
     </div>
   );
 };

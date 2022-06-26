@@ -31,4 +31,51 @@ router.get("/:bandId", async (req, res, next) => {
   }
 });
 
+// POST add band  /api/bands/add
+router.post("/add", async (req, res, next) => {
+  try {
+    const newBand = await Band.create({
+      name: req.body.name,
+      bio: req.body.bio
+    })
+    const user = await User.findOne({
+      where: {
+        id: req.body.user.id
+      }
+    })
+    user.setMember(newBand);
+    res.status(201).send(newBand);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// GET add member  /api/bands/add
+router.put("/:bandId/addMembers", async (req, res, next) => {
+  try {
+    const band = await Band.findOne({
+      where: {
+        id: req.params.bandId,
+      },
+      include: [Song, { model: Part, include: [User] }, { model: User }],
+    });
+    const user = await User.findOne({
+      where: {
+        id: req.body.userId
+      }
+    })
+    console.log(band);
+    await user.setMember(band);
+    const newBand = await Band.findOne({
+      where: {
+        id: req.params.bandId,
+      },
+      include: [Song, { model: Part, include: [User] }, { model: User }],
+    });
+    res.status(201).send(newBand);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;
