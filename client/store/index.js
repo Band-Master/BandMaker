@@ -4,12 +4,14 @@ import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import auth from "./auth";
 import singleUser from "./singleUser";
+import allUsersReducer from "./allUsers";
 import singleBand from "./singleBand";
 import singleSong from "./singleSong";
 
 const reducer = combineReducers({
   auth: auth,
   user: singleUser,
+  users: allUsersReducer,
   band: singleBand,
   song: singleSong,
 });
