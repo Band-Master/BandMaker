@@ -35,6 +35,7 @@ const SingleBand = (props) => {
             );
           })
         : null}
+        <Link to={`/bands/${band.id}/addSong`}>Create Song</Link>
     </div>
   );
 };

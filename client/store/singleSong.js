@@ -15,6 +15,7 @@ const FetchSong = "FETCH_SONG";
 const DeleteSong = "DELETE_SONG";
 const UpdateSong = "UPDATE_SONG";
 const AddPart = "ADD_PART";
+const AddSong = "ADD_SONG";
 
 
 
@@ -33,6 +34,10 @@ export const updateSong = (song) => {
 
 export const addPart = (part) => {
   return { type: AddPart, part }
+}
+
+export const addSong = (song) => {
+  return { type: AddSong, song }
 }
 
 // thunks
@@ -55,6 +60,18 @@ export const updateSongThunk = (song) => {
       let response = await axios.put(`/api/songs/${song.id}`, song);
       let newSong = response.data;
       dispatch(updateSong(newSong));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const addSongThunk = (song) => {
+  return async function (dispatch) {
+    try {
+      let response = await axios.post(`/api/songs/add`, song);
+      let newSong = response.data;
+      dispatch(addSong(newSong));
     } catch (err) {
       console.log(err);
     }
@@ -87,6 +104,9 @@ export default function songReducer(state = initialState, action) {
     case UpdateSong:
       state.song = action.song;
       state.parts = action.song.parts
+      return {...state};
+    case AddSong:
+      state.song = action.song;
       return {...state};
     default:
       return state;

@@ -8,6 +8,7 @@ import SingleBand from "./components/SingleBand";
 import SingleSong from "./components/SingleSong";
 import AddBand from "./components/AddBand";
 import AddMembers from "./components/AddMembers";
+import AddSong from "./components/AddSong";
 
 /**
  * COMPONENT
@@ -30,6 +31,7 @@ class Routes extends Component {
             <Route path="/bands/:bandId/addMembers" component={AddMembers} />
             <Route path="/addBand" component={AddBand} />
             <Route path="/songs/:songId" component={SingleSong} />
+            <Route exact path={'/bands/:bandId/addSong'} component={AddSong} />
           </Switch>
         ) : (
           <Switch>
