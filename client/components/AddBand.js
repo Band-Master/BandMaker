@@ -39,7 +39,7 @@ const AddBand = () => {
                 <input type="text" value={bio} placeholder='Bio' onChange={handleBio}/>
                 <button className='btn_action pp'>Submit</button>
             </form>
-            <Link to="/home">Cancel</Link>
+            <Link to="/home">Back</Link>
         </div>
     );
 };

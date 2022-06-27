@@ -38,12 +38,15 @@ router.post("/add", async (req, res, next) => {
       name: req.body.name,
       bio: req.body.bio
     })
-    const user = await User.findOne({
-      where: {
-        id: req.body.user.id
-      }
+    // const user = await User.findOne({
+    //   where: {
+    //     id: req.body.user.id
+    //   }
+    // })
+    await User_Bands.create({
+      userId: req.body.user.id,
+      bandId: newBand.id
     })
-    user.setMember(newBand);
     res.status(201).send(newBand);
   } catch (error) {
     next(error);

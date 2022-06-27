@@ -18,4 +18,19 @@ router.get("/:songId", async (req, res, next) => {
   }
 });
 
+// add song  /api/songs/add
+
+router.post("/add", async (req, res, next) => {
+  try {
+    const newSong = await Song.create({
+      title: req.body.title,
+      bpm: req.body.bpm,
+      bandId: req.body.bandId
+    });
+    res.status(201).send(newSong);
+  } catch (error) {
+    next(error);
+  }
+})
+
 module.exports = router;
