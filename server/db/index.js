@@ -9,11 +9,12 @@ const Composition = require("./models/Composition");
 const Song = require("./models/Song");
 const Part = require("./models/Part");
 const Line = require("./models/Line");
+const User_Bands = require("./models/User_Bands");
 
 //associations
 
-Band.belongsToMany(User, { through: "User_Bands" });
-User.belongsToMany(Band, { through: "User_Bands", as: "member" });
+Band.belongsToMany(User, { through: User_Bands });
+User.belongsToMany(Band, { through: User_Bands, as: "member" });
 
 User.hasMany(ModelSong);
 
@@ -39,5 +40,6 @@ module.exports = {
     Song,
     Part,
     Line,
+    User_Bands
   },
 };

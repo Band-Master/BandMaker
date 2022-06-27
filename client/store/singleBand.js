@@ -70,7 +70,7 @@ export const addBandThunk = (band) => {
 export const setMemberThunk = (band) => {
   return async function (dispatch) {
     try {
-      let response = await axios.put(`/api/bands/${band.bandId}/addMembers`, band);
+      let response = await axios.post(`/api/bands/${band.bandId}/addMembers`, band);
       let newband = response.data
       console.log("newband", newband);
       dispatch(setMember(newband));
