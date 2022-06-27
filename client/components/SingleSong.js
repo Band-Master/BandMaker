@@ -5,11 +5,13 @@ import { fetchSongThunk } from "../store/singleSong";
 import PartPlayBack from "./PartPlayBack";
 import {BsFillPlayCircleFill, BsFillPauseCircleFill, BsFillReplyFill} from 'react-icons/bs';
 import PartForm from './PartForm';
+import { Link } from "react-router-dom";
 
 
 const SingleSong = (props) => {
   const {parts} = useSelector((state) => state.song);
   const song = useSelector((state) => state.song);
+  const band = useSelector((state) => state.band);
   const [submit, setSubmit] = useState(false);
   const {
     seconds,
@@ -45,6 +47,7 @@ const SingleSong = (props) => {
     <div className="songs_container">
       <div style={{fontSize: '60px'}}>{song.song.title}</div>
       <ul className="loi">
+        <Link to={`/bands/${band.id}`} style={{fontSize: '20px', color: 'white'}}>Back</Link>
         {parts.length ?
           <div className='song_container'>
             <div style={{fontSize: '30px'}}>

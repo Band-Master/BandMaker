@@ -20,6 +20,7 @@ form div {
   display: inline-block;
 }
 
+
 input[type="range"] {
   -webkit-appearance: none;
   margin: 10px 0;
