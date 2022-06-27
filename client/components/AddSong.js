@@ -36,7 +36,7 @@ const AddSong = (props) => {
                 <input type="number" value={bpm} placeholder='tempo' onChange={handleBpm}/>
                 <button className='btn_action pp'>Submit</button>
             </form>
-            <Link to={`/bands/${props.match.params.bandId}`}>Back</Link>
+            <Link className='action_btns'to={`/bands/${props.match.params.bandId}`}>Back</Link>
         </div>
     );
 };

@@ -14,28 +14,34 @@ const SingleBand = (props) => {
   return (
     <div className="App">
       <h1>{band.name}</h1>
-      <h1>Members</h1>
-      {band.users
-        ? band.users.map((user) => {
-            return (
-              <div>
-                <h3>{user.username}</h3>
-              </div>
-            );
-          })
-        : null}
-        <Link to={`/bands/${band.id}/addMembers`}>Add Members</Link>
+      <div className="loi">
+        <div className="members_container">
+        <h1>Members:</h1>
+        {band.users
+          ? band.users.map((user) => {
+              return (
+                <div>
+                  <h3>{user.username}</h3>
+                </div>
+              );
+            })
+          : null}
+          <Link to={`/bands/${band.id}/addMembers`}>Add Members</Link>
+          </div>
+      <div className="bands_container">
       <h1>Songs</h1>
-      {band.songs
-        ? band.songs.map((song) => {
-            return (
-              <div>
-                <Link to={`/songs/${song.id}`}>{song.title}</Link>
-              </div>
-            );
-          })
-        : null}
-        <Link to={`/bands/${band.id}/addSong`}>Create Song</Link>
+        {band.songs
+          ? band.songs.map((song) => {
+              return (
+                <div>
+                  <Link to={`/songs/${song.id}`}>{song.title}</Link>
+                </div>
+              );
+            })
+          : null}
+          <Link to={`/bands/${band.id}/addSong`}>Create Song</Link>
+        </div>
+      </div>
     </div>
   );
 };

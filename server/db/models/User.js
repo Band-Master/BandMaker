@@ -17,6 +17,9 @@ const User = db.define("user", {
   },
   imgUrl: {
     type: Sequelize.STRING,
+  },
+  coverUrl: {
+    type: Sequelize.STRING,
   }
 });
 
