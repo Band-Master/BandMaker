@@ -1,10 +1,8 @@
-import { useState, useRef } from 'react';
-
-const useTimer = (initialState = 0) => {
-  const [timer, setTimer] = useState(initialState)
-  const [isActive, setIsActive] = useState(false)
-  const [isPaused, setIsPaused] = useState(false)
-  const countRef = useRef(null)
+export const useTimer = (initialState = 0) => {
+  const [timer, setTimer] = React.useState(initialState)
+  const [isActive, setIsActive] = React.useState(false)
+  const [isPaused, setIsPaused] = React.useState(false)
+  const countRef = React.useRef(null)
 
   const handleStart = () => {
     setIsActive(true)
@@ -26,14 +24,21 @@ const useTimer = (initialState = 0) => {
     }, 1000)
   }
 
-  const handleReset = () => {
-    clearInterval(countRef.current)
-    setIsActive(false)
-    setIsPaused(false)
-    setTimer(0)
+  const handleReset = (x) => {
+    clearInterval(countRef.current);
+    setIsActive(false);
+    setIsPaused(false);
+    setTimer(x);
   }
 
   return { timer, isActive, isPaused, handleStart, handlePause, handleResume, handleReset }
 }
 
-export default useTimer
+export const formatTime = (timer) => {
+  const getSeconds = `0${(timer % 60)}`.slice(-2)
+  const minutes = `${Math.floor(timer / 60)}`
+  const getMinutes = `0${minutes % 60}`.slice(-2)
+  const getHours = `0${Math.floor(timer / 3600)}`.slice(-2)
+
+  return {getSeconds, getMinutes, getHours}
+}

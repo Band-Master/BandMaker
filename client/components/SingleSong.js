@@ -30,9 +30,19 @@ const SingleSong = (props) => {
     let width = clickRef.current.clientWidth;
     const offset = e.nativeEvent.offsetX;
     const divprogress = offset / width * 100;
-    const stateTime = (seconds + (divprogress / 100 * duration));
-    reset({seconds: stateTime}, false);
-    console.log(stateTime);
+    console.log("divprogress", divprogress);
+
+    const stateTime = (divprogress / 100 * duration);
+    const stateMinutes = (divprogress / 100 * duration)/60;
+
+    const stopwatchOffset = new Date();
+
+    stopwatchOffset.setMinutes(stopwatchOffset.getMinutes() - 1 + stateMinutes);
+    stopwatchOffset.setSeconds(stopwatchOffset.getSeconds() + stateTime);
+    reset(stopwatchOffset, false);
+    console.log("idk", stopwatchOffset);
+
+    console.log("after reset:","stateTime", stateTime,"stateMinutes", stateMinutes, "seconds", seconds);
   }
 
   const dispatch = useDispatch();
@@ -43,11 +53,6 @@ const SingleSong = (props) => {
 
   useEffect(() => {
     if(audio.length === parts.length) {
-      // const lengthArray = audio.map((part) => {
-      //   console.log('part.current', part.current);
-      //   return part.current.duration;
-      // })
-      // lengthArray.sort(function(a, b){return b - a});
       audio.sort((a,b)=>{return a.current.duration-b.current.duration})
       setDuration(audio[0]);
       console.log("audio array",audio, "duration", duration );
@@ -71,7 +76,7 @@ const SingleSong = (props) => {
             </div>
             <div className="navigation">
               <div className="navigation_wrapper" onClick={checkWidth} ref={clickRef}>
-                <div className="seek_bar" style={{width: `${seconds+"%"}`}}></div>
+                <div className="seek_bar" style={{width: `${((seconds/duration)*100)+"%"}`}}></div>
               </div>
                 <div className="controls_wrapper">
                   <div style={{fontSize: '80px'}}>
