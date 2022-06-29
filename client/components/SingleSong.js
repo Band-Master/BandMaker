@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 
 const SingleSong = (props) => {
-  const {parts} = useSelector((state) => state.song);
+  const {parts, audio} = useSelector((state) => state.song);
   const song = useSelector((state) => state.song);
   const band = useSelector((state) => state.band);
   const [submit, setSubmit] = useState(false);
@@ -20,20 +20,19 @@ const SingleSong = (props) => {
     start,
     pause,
     reset,
-  } = useStopwatch({ autoStart: false, offsetTimestamp: 0 });
-  const [duration, setDuration] = useState(300)
+  } = useStopwatch({ autoStart: false });
+  const [duration, setDuration] = useState(null);
 
   const clickRef = useRef();
-
+  
   const checkWidth = (e)=>
   {
     let width = clickRef.current.clientWidth;
     const offset = e.nativeEvent.offsetX;
     const divprogress = offset / width * 100;
-    const time = new Date();
-    time.setSeconds(time.getSeconds() + (divprogress / 100 * duration));
-    reset(time, false);
-    console.log(time);
+    const stateTime = (seconds + (divprogress / 100 * duration));
+    reset({seconds: stateTime}, false);
+    console.log(stateTime);
   }
 
   const dispatch = useDispatch();
@@ -42,13 +41,30 @@ const SingleSong = (props) => {
     dispatch(fetchSongThunk(songId));
   }, [submit]);
 
+  useEffect(() => {
+    if(audio.length === parts.length) {
+      // const lengthArray = audio.map((part) => {
+      //   console.log('part.current', part.current);
+      //   return part.current.duration;
+      // })
+      // lengthArray.sort(function(a, b){return b - a});
+      audio.sort((a,b)=>{return a.current.duration-b.current.duration})
+      setDuration(audio[0]);
+      console.log("audio array",audio, "duration", duration );
+    }
+  }, [audio]);
+
+  useEffect(() => {
+    console.log(duration);
+  }, [duration]);
+
 
   return (
     <div className="songs_container">
       <div style={{fontSize: '60px'}}>{song.song.title}</div>
       <ul className="loi">
         <Link to={`/bands/${band.id}`} style={{fontSize: '20px', color: 'white'}}>Back</Link>
-        {parts.length ?
+        {duration ?
           <div className='song_container'>
             <div style={{fontSize: '30px'}}>
               <p>main</p>
@@ -70,7 +86,7 @@ const SingleSong = (props) => {
         </ul>
       <ul className="loi">
         {parts.length
-          ? parts.map((part) => <PartPlayBack part={part} key={part.id} isRunning={isRunning} seconds={seconds}/>) 
+          ? parts.map((part) => <PartPlayBack part={part} key={part.id} isRunning={isRunning} seconds={seconds} duration={duration} setDuration={setDuration} />) 
           : null}
         {song ? <PartForm setSubmit={setSubmit} submit={submit} /> : null}
       </ul>

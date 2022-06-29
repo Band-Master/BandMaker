@@ -1,8 +1,11 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import './player.scss';
-import {BsFillPlayCircleFill, BsFillPauseCircleFill, BsFillSkipStartCircleFill, BsSkipEndCircleFill, BsFillSkipEndCircleFill} from 'react-icons/bs';
+import {BsFillPlayCircleFill, BsFillPauseCircleFill } from 'react-icons/bs';
+import { useDispatch } from "react-redux";
+import { addAudioThunk } from '../../store/singleSong';
 
-const PartPlayer = ({audioElem, isplaying, setisplaying, part, currentPart})=> {
+
+const PartPlayer = ({audioElem, isplaying, setisplaying, part, currentPart, duration, setDuration})=> {
 
   const clickRef = useRef();
 
@@ -11,6 +14,10 @@ const PartPlayer = ({audioElem, isplaying, setisplaying, part, currentPart})=> {
     setisplaying(!isplaying);
 
   }
+  const dispatch = useDispatch();
+  useEffect(() => {
+      dispatch(addAudioThunk(audioElem));
+  }, []);
 
 
   const checkWidth = (e)=>
@@ -28,7 +35,7 @@ const PartPlayer = ({audioElem, isplaying, setisplaying, part, currentPart})=> {
         <p>{part.name}</p>
       </div>
       <div className="navigation">
-        <div className="navigation_wrapper" onClick={checkWidth} ref={clickRef}>
+        <div className="navigation_wrapper" onClick={checkWidth} ref={clickRef} style={{width: `${(duration / currentPart.length) +"%"}`}}>
           <div className="seek_bar" style={{width: `${currentPart.progress+"%"}`}}></div>
         </div>
         <div className="controls_wrapper">

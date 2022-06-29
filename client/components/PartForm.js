@@ -27,7 +27,7 @@ const PartForm = ({ setSubmit, submit }) => {
     
     const dispatch = useDispatch();
     useEffect(() => {
-        console.log("audioUrl", audioUrl, "song", song);
+        // console.log("audioUrl", audioUrl, "song", song);
         if(audioUrl && partName) {
             dispatch(addPartThunk({name: partName, audioUrl: audioUrl, songId: song.song.id, bandId: song.song.bandId, userId: id}));
             setSubmit(!submit);

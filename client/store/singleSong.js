@@ -8,7 +8,7 @@ const initialState = {
   repeat: false,
   random: false,
   playing: false,
-  audio: null,
+  audio: [],
 };
 
 const FetchSong = "FETCH_SONG";
@@ -16,6 +16,7 @@ const DeleteSong = "DELETE_SONG";
 const UpdateSong = "UPDATE_SONG";
 const AddPart = "ADD_PART";
 const AddSong = "ADD_SONG";
+const AddAudio = "ADD_AUDIO";
 
 
 
@@ -40,7 +41,18 @@ export const addSong = (song) => {
   return { type: AddSong, song }
 }
 
+export const addAudio = (audio) => {
+  return {type: AddAudio, audio}
+}
+
 // thunks
+
+export const addAudioThunk = (audio) => {
+  return function (dispatch) {
+    dispatch(addAudio(audio));
+  }
+}
+
 export const fetchSongThunk = (id) => {
   return async function (dispatch) {
     try {
@@ -107,6 +119,9 @@ export default function songReducer(state = initialState, action) {
       return {...state};
     case AddSong:
       state.song = action.song;
+      return {...state};
+    case AddAudio:
+      state.audio = [...state.audio, action.audio];
       return {...state};
     default:
       return state;
