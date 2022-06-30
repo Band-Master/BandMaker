@@ -2,6 +2,8 @@
 
 MVP Statement; https://drive.google.com/drive/folders/1Y31tSFTbO2Jb60DneTL9jRegjCFPe8TT?usp=sharing
 
+Video Walkthrough: https://youtu.be/DXyHXV1HkT8
+
 ## Setup
 
 To use this run dev, complete the following steps.
