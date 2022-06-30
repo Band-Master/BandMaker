@@ -49,7 +49,7 @@ export const Home = (props) => {
             </div>
             }
         </div>
-        <h2 className="bands_container">Your Bands</h2>
+        <h2 className="user_bands_container">Your Bands</h2>
         {user.member ? user.member.map((band) => {
           return (
             <div key={band.id} className="bands_wrapper">
@@ -59,7 +59,7 @@ export const Home = (props) => {
           );
         })
         : null}
-        <div className="bands_container">
+        <div className="user_bands_container">
         <Link to={`/addBand`}>Create Band</Link>
         </div>
     </div>

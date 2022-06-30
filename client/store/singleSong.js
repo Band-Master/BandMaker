@@ -8,7 +8,7 @@ const initialState = {
   repeat: false,
   random: false,
   playing: false,
-  audio: null,
+  audio: [],
 };
 
 const FetchSong = "FETCH_SONG";
@@ -16,6 +16,7 @@ const DeleteSong = "DELETE_SONG";
 const UpdateSong = "UPDATE_SONG";
 const AddPart = "ADD_PART";
 const AddSong = "ADD_SONG";
+const AddAudio = "ADD_AUDIO";
 
 
 
@@ -40,7 +41,18 @@ export const addSong = (song) => {
   return { type: AddSong, song }
 }
 
+export const addAudio = (audio) => {
+  return {type: AddAudio, audio}
+}
+
 // thunks
+
+export const addAudioThunk = (audio) => {
+  return function (dispatch) {
+    dispatch(addAudio(audio));
+  }
+}
+
 export const fetchSongThunk = (id) => {
   return async function (dispatch) {
     try {
@@ -53,6 +65,8 @@ export const fetchSongThunk = (id) => {
     }
   };
 };
+
+
 
 export const updateSongThunk = (song) => {
   return async function (dispatch) {
@@ -75,6 +89,14 @@ export const addSongThunk = (song) => {
     } catch (err) {
       console.log(err);
     }
+  };
+};
+
+export const deleteSongThunk = (songId, bandId, history) => {
+  return async (dispatch) => {
+    const { data: song } = await axios.delete(`/api/songs/delete/${songId}`);
+    dispatch(deleteSong(song));
+    history.push(`/${bandId}`);
   };
 };
 
@@ -107,6 +129,11 @@ export default function songReducer(state = initialState, action) {
       return {...state};
     case AddSong:
       state.song = action.song;
+      return {...state};
+    case DeleteSong:
+      return state.filter((song) => song.id !== action.song.id);
+    case AddAudio:
+      state.audio = [...state.audio, action.audio];
       return {...state};
     default:
       return state;

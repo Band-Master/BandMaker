@@ -113,3 +113,9 @@
     text-shadow: 5px;
     background-color: rgb(171, 200, 187);
 }
+
+.plus_sign {
+    color:rgb(255, 255, 255);
+    flex-direction: row;
+    margin-left: 20px;
+}

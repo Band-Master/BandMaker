@@ -2,11 +2,12 @@ import './App.css';
 import PartPlayer from './Player/PartPlayer.jsx';
 import React,{ useRef, useState, useEffect } from 'react';
 
-const PartPlayBack = ({part, isRunning, seconds}) => {
+const PartPlayBack = ({part, isRunning, seconds, duration, setDuration }) => {
   const [isplaying, setisplaying] = useState(false);
   const [currentPart, setCurrentPart] = useState(part);
 
   const audioElem = useRef();
+
 
   useEffect(() => {
     if (isplaying) {
@@ -22,6 +23,9 @@ const PartPlayBack = ({part, isRunning, seconds}) => {
     if (isRunning) {
       audioElem.current.currentTime = seconds;
       setisplaying(true);
+      if(isNaN(duration)) {
+        setDuration(duration.current.duration)
+      }
     } else {
       setisplaying(false);
     }
@@ -44,7 +48,7 @@ const PartPlayBack = ({part, isRunning, seconds}) => {
   return (
     <div className="App">
       <audio src={currentPart.audioUrl} ref={audioElem} onTimeUpdate={onPlaying} />
-      <PartPlayer part={part} isplaying={isplaying} setisplaying={setisplaying} audioElem={audioElem} currentPart={currentPart} setCurrentPart={setCurrentPart} />
+      <PartPlayer part={part} isplaying={isplaying} setisplaying={setisplaying} audioElem={audioElem} currentPart={currentPart} setCurrentPart={setCurrentPart} duration={duration} setDuration={setDuration} />
     </div>
   );
 }

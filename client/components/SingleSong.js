@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 
 const SingleSong = (props) => {
-  const {parts} = useSelector((state) => state.song);
+  const {parts, audio} = useSelector((state) => state.song);
   const song = useSelector((state) => state.song);
   const band = useSelector((state) => state.band);
   const [submit, setSubmit] = useState(false);
@@ -20,20 +20,31 @@ const SingleSong = (props) => {
     start,
     pause,
     reset,
-  } = useStopwatch({ autoStart: false, offsetTimestamp: 0 });
-  const [duration, setDuration] = useState(300)
+  } = useStopwatch({ autoStart: false });
+  const [duration, setDuration] = useState(null);
 
   const clickRef = useRef();
 
+  const totalSeconds = seconds + (minutes * 60);
+  
   const checkWidth = (e)=>
   {
     let width = clickRef.current.clientWidth;
     const offset = e.nativeEvent.offsetX;
     const divprogress = offset / width * 100;
-    const time = new Date();
-    time.setSeconds(time.getSeconds() + (divprogress / 100 * duration));
-    reset(time, false);
-    console.log(time);
+    console.log("divprogress", divprogress);
+
+    const stateTime = (divprogress / 100 * duration);
+    const stateMinutes = (divprogress / 100 * duration)/60;
+
+    const stopwatchOffset = new Date();
+
+    // stopwatchOffset.setMinutes(stopwatchOffset.getMinutes() - 1 + stateMinutes);
+    stopwatchOffset.setSeconds(stopwatchOffset.getSeconds() + stateTime);
+    reset(stopwatchOffset, false);
+    // console.log("idk", stopwatchOffset);
+
+    console.log("after reset:","stateTime", stateTime,"stateMinutes", stateMinutes, "minutes", minutes, "seconds", seconds);
   }
 
   const dispatch = useDispatch();
@@ -42,20 +53,36 @@ const SingleSong = (props) => {
     dispatch(fetchSongThunk(songId));
   }, [submit]);
 
+  useEffect(() => {
+    if(parts.length) {
+      if(audio.length === parts.length) {
+        audio.sort((a,b)=>{return a.current.duration-b.current.duration})
+        setDuration(audio[0]);
+        console.log("audio array",audio, "duration", duration );
+      }
+    }
+  }, [audio]);
+
+  useEffect(() => {
+    if(duration) {
+      console.log(duration);
+    };
+  }, [duration]);
+
 
   return (
     <div className="songs_container">
       <div style={{fontSize: '60px'}}>{song.song.title}</div>
       <ul className="loi">
         <Link to={`/bands/${band.id}`} style={{fontSize: '20px', color: 'white'}}>Back</Link>
-        {parts.length ?
+        {duration ?
           <div className='song_container'>
             <div style={{fontSize: '30px'}}>
               <p>main</p>
             </div>
             <div className="navigation">
               <div className="navigation_wrapper" onClick={checkWidth} ref={clickRef}>
-                <div className="seek_bar" style={{width: `${seconds+"%"}`}}></div>
+                <div className="seek_bar" style={{width: `${((totalSeconds/duration)*100)+"%"}`}}></div>
               </div>
                 <div className="controls_wrapper">
                   <div style={{fontSize: '80px'}}>
@@ -70,7 +97,7 @@ const SingleSong = (props) => {
         </ul>
       <ul className="loi">
         {parts.length
-          ? parts.map((part) => <PartPlayBack part={part} key={part.id} isRunning={isRunning} seconds={seconds}/>) 
+          ? parts.map((part) => <PartPlayBack part={part} key={part.id} isRunning={isRunning} seconds={totalSeconds} duration={duration} setDuration={setDuration} />) 
           : null}
         {song ? <PartForm setSubmit={setSubmit} submit={submit} /> : null}
       </ul>
