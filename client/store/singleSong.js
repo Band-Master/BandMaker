@@ -66,6 +66,8 @@ export const fetchSongThunk = (id) => {
   };
 };
 
+
+
 export const updateSongThunk = (song) => {
   return async function (dispatch) {
     try {
@@ -87,6 +89,14 @@ export const addSongThunk = (song) => {
     } catch (err) {
       console.log(err);
     }
+  };
+};
+
+export const deleteSongThunk = (songId, bandId, history) => {
+  return async (dispatch) => {
+    const { data: song } = await axios.delete(`/api/songs/delete/${songId}`);
+    dispatch(deleteSong(song));
+    history.push(`/${bandId}`);
   };
 };
 
@@ -120,6 +130,8 @@ export default function songReducer(state = initialState, action) {
     case AddSong:
       state.song = action.song;
       return {...state};
+    case DeleteSong:
+      return state.filter((song) => song.id !== action.song.id);
     case AddAudio:
       state.audio = [...state.audio, action.audio];
       return {...state};

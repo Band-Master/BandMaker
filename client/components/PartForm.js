@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { baseApp } from '../base';
 import 'firebase/firestore';
 import { addPartThunk } from '../store/singleSong';
+import {BsPlusLg} from 'react-icons/bs'
 
 const PartForm = ({ setSubmit, submit }) => {
     const [audioUrl, setAudioUrl] = useState(null);
@@ -39,7 +40,7 @@ const PartForm = ({ setSubmit, submit }) => {
             <label>upload audio</label>
             <input type="file" onChange={onFileChange} />
             <input type="text" name='name' placeholder='Part Name'/>
-            <button className='btn_action pp'>Submit</button>
+            <button className='plus_sign'> <h3>Submit</h3> <BsPlusLg/></button>
         </form>
     );
 };

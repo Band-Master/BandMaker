@@ -2,14 +2,24 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBandThunk } from "../store/singleBand";
 import { Link } from "react-router-dom";
+import { deleteSongThunk } from "../store/singleSong";
 
 const SingleBand = (props) => {
   const band = useSelector((state) => state.band);
+  const [deleteId, setDeleteId] = useState(null)
+  const [deleted, setDeleted] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
     const bandId = props.match.params.bandId;
     dispatch(fetchBandThunk(bandId));
-  }, []);
+  }, [deleted]);
+  useEffect(() => {
+    if(deleteId) {
+      const bandId = props.match.params.bandId;
+      dispatch(deleteSongThunk(deleteId, bandId));
+      setDeleted(!deleted);
+    }
+  }, [deleteId])
   console.log("band", band);
   return (
     <div className="App">
@@ -34,7 +44,7 @@ const SingleBand = (props) => {
           ? band.songs.map((song) => {
               return (
                 <div>
-                  <Link to={`/songs/${song.id}`}>{song.title}</Link>
+                  <Link to={`/songs/${song.id}`}>{song.title}</Link> <button onClick={() => setDeleteId(song.id)}>X</button>
                 </div>
               );
             })

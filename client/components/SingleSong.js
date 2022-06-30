@@ -24,6 +24,8 @@ const SingleSong = (props) => {
   const [duration, setDuration] = useState(null);
 
   const clickRef = useRef();
+
+  const totalSeconds = seconds + (minutes * 60);
   
   const checkWidth = (e)=>
   {
@@ -37,12 +39,12 @@ const SingleSong = (props) => {
 
     const stopwatchOffset = new Date();
 
-    stopwatchOffset.setMinutes(stopwatchOffset.getMinutes() - 1 + stateMinutes);
+    // stopwatchOffset.setMinutes(stopwatchOffset.getMinutes() - 1 + stateMinutes);
     stopwatchOffset.setSeconds(stopwatchOffset.getSeconds() + stateTime);
     reset(stopwatchOffset, false);
-    console.log("idk", stopwatchOffset);
+    // console.log("idk", stopwatchOffset);
 
-    console.log("after reset:","stateTime", stateTime,"stateMinutes", stateMinutes, "seconds", seconds);
+    console.log("after reset:","stateTime", stateTime,"stateMinutes", stateMinutes, "minutes", minutes, "seconds", seconds);
   }
 
   const dispatch = useDispatch();
@@ -52,15 +54,19 @@ const SingleSong = (props) => {
   }, [submit]);
 
   useEffect(() => {
-    if(audio.length === parts.length) {
-      audio.sort((a,b)=>{return a.current.duration-b.current.duration})
-      setDuration(audio[0]);
-      console.log("audio array",audio, "duration", duration );
+    if(parts.length) {
+      if(audio.length === parts.length) {
+        audio.sort((a,b)=>{return a.current.duration-b.current.duration})
+        setDuration(audio[0]);
+        console.log("audio array",audio, "duration", duration );
+      }
     }
   }, [audio]);
 
   useEffect(() => {
-    console.log(duration);
+    if(duration) {
+      console.log(duration);
+    };
   }, [duration]);
 
 
@@ -76,7 +82,7 @@ const SingleSong = (props) => {
             </div>
             <div className="navigation">
               <div className="navigation_wrapper" onClick={checkWidth} ref={clickRef}>
-                <div className="seek_bar" style={{width: `${((seconds/duration)*100)+"%"}`}}></div>
+                <div className="seek_bar" style={{width: `${((totalSeconds/duration)*100)+"%"}`}}></div>
               </div>
                 <div className="controls_wrapper">
                   <div style={{fontSize: '80px'}}>
@@ -91,7 +97,7 @@ const SingleSong = (props) => {
         </ul>
       <ul className="loi">
         {parts.length
-          ? parts.map((part) => <PartPlayBack part={part} key={part.id} isRunning={isRunning} seconds={seconds} duration={duration} setDuration={setDuration} />) 
+          ? parts.map((part) => <PartPlayBack part={part} key={part.id} isRunning={isRunning} seconds={totalSeconds} duration={duration} setDuration={setDuration} />) 
           : null}
         {song ? <PartForm setSubmit={setSubmit} submit={submit} /> : null}
       </ul>

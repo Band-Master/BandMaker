@@ -17,7 +17,7 @@ async function seed() {
   // Creating Users
   const users = await Promise.all([
     User.create({ username: "Zach Patch", password: "123" }),
-    User.create({ username: "Shadrack", password: "123" }),
+    User.create({ username: "Shadrack", password: "123", imgUrl: "https://firebasestorage.googleapis.com/v0/b/band-maker-d5da5.appspot.com/o/47B35F9D-B8AB-4B2B-9F91-D047AC79C1C2.JPG?alt=media&token=cd108488-7a3e-4963-9d0a-e0d3c9ed39bc", coverUrl: "https://firebasestorage.googleapis.com/v0/b/band-maker-d5da5.appspot.com/o/02038610-D178-49D0-8B4A-B690F26971F8.JPG?alt=media&token=cc174545-ba18-4fc7-b4cb-5c48f63b6939" }),
     User.create({ username: "Lucy", password: "123" }),
   ]);
 

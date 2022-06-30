@@ -33,4 +33,15 @@ router.post("/add", async (req, res, next) => {
   }
 })
 
+// DELETE /api/songs/delete/:songId
+router.delete("/delete/:songId", async (req, res, next) => {
+  try {
+    const song = await Song.findByPk(req.params.songId);
+    await song.destroy();
+    res.send(song);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;
