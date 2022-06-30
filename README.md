@@ -4,6 +4,7 @@ MVP Statement; https://drive.google.com/drive/folders/1Y31tSFTbO2Jb60DneTL9jRegj
 
 Video Walkthrough: https://youtu.be/DXyHXV1HkT8
 
+This is a web app that allows users to create a band, and add users to that band. Users that are members of that band can create and edit songs. This is done by first, creating the song with a name and a bpm, and then uploading audio files as "parts" to that song. Within the single song view, users can play the whole song with the main playback component, or play individual parts by themselves. 
 ## Setup
 
 To use this run dev, complete the following steps.
