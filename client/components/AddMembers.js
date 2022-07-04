@@ -34,7 +34,7 @@ const AddMembers = () => {
                     <button className='btn_action pp' onClick={() => setUserId(user.id)} key={user.id}>Add {user.username}</button>
                 )
             }) : null}
-            <Link to="/home">Cancel</Link>
+            <Link to={`/bands/${band.id}`}>Back</Link>
         </div>
     );
 };

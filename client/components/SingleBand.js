@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchBandThunk } from "../store/singleBand";
 import { Link } from "react-router-dom";
 import { deleteSongThunk } from "../store/singleSong";
+import AddSong from "./AddSong";
 
 const SingleBand = (props) => {
   const band = useSelector((state) => state.band);
@@ -49,7 +50,9 @@ const SingleBand = (props) => {
               );
             })
           : null}
-          <Link to={`/bands/${band.id}/addSong`}>Create Song</Link>
+          <h2>Create new song</h2>
+          <h4>add title and bpm</h4>
+          <AddSong bandId={band.id} deleted={deleted} setDeleted={setDeleted}/>
         </div>
       </div>
     </div>

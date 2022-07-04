@@ -5,6 +5,7 @@ import { fetchUserThunk } from "../store/singleUser";
 import { Link } from "react-router-dom";
 import ImgForm from "./ImgForm";
 import CoverForm from './CoverForm';
+import AddBand from "./AddBand";
 
 /**
  * COMPONENT
@@ -13,10 +14,11 @@ export const Home = (props) => {
   const { id } = props;
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const [newBand, setNewBand] = useState(false);
 
   useEffect(() => {
     dispatch(fetchUserThunk(id));
-  }, []);
+  }, [newBand]);
   
   return (
     <div className="App">
@@ -60,7 +62,8 @@ export const Home = (props) => {
         })
         : null}
         <div className="user_bands_container">
-        <Link to={`/addBand`}>Create Band</Link>
+          <h2>Create Band</h2>
+          <AddBand user={user} setNewBand={setNewBand} newBand={newBand}/>
         </div>
     </div>
   );
