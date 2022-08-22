@@ -32,19 +32,11 @@ const SingleSong = (props) => {
     let width = clickRef.current.clientWidth;
     const offset = e.nativeEvent.offsetX;
     const divprogress = offset / width * 100;
-    console.log("divprogress", divprogress);
-
     const stateTime = (divprogress / 100 * duration);
     const stateMinutes = (divprogress / 100 * duration)/60;
-
     const stopwatchOffset = new Date();
-
-    // stopwatchOffset.setMinutes(stopwatchOffset.getMinutes() - 1 + stateMinutes);
     stopwatchOffset.setSeconds(stopwatchOffset.getSeconds() + stateTime);
     reset(stopwatchOffset, false);
-    // console.log("idk", stopwatchOffset);
-
-    console.log("after reset:","stateTime", stateTime,"stateMinutes", stateMinutes, "minutes", minutes, "seconds", seconds);
   }
 
   const dispatch = useDispatch();
@@ -62,13 +54,6 @@ const SingleSong = (props) => {
       }
     }
   }, [audio]);
-
-  useEffect(() => {
-    if(duration) {
-      console.log(duration);
-    };
-  }, [duration]);
-
 
   return (
     <div className="songs_container">

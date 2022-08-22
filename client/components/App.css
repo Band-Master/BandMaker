@@ -25,6 +25,24 @@
     position: fixed;
 }
 
+#sidebar img {
+    padding-top: 10px;
+}
+
+#sidebar section {
+text-align: left;
+padding-left: 10px;
+}
+
+#sidebar a {
+transition: border 0.2s ease;
+cursor: pointer;
+}
+
+#sidebar a:hover {
+border-bottom: 2px solid #00aaaa;
+}
+
 #center {
     width: 1300px;
     height: 50px;

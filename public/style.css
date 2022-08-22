@@ -132,13 +132,24 @@ input[type="range"]:focus::-ms-fill-upper {
 html {
   min-width: 800px;
 }
-body {
+/* body {
   margin: 0;
   font-family: "Montserrat", sans-serif;
   display: flex;
   justify-content: center;
   height: 100vh;
-  background-color: #e3e3e3;
+  background-color: #7c7575;
+} */
+body {
+  font-family: "Open Sans", arial, sans-serif;
+  padding-bottom: 56px;
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(45deg, #222, #333);
+  background-attachment: fixed;
+  color: #f2f2f2;
+  letter-spacing: 0.03em;
 }
 button {
   background: none;
