@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 // import ImgForm from "./ImgForm";
 // import CoverForm from './CoverForm';
 import AddBand from "./AddBand";
-import Sidebar from "./SideBar";
 
 /**
  * COMPONENT
@@ -22,38 +21,7 @@ export const Home = (props) => {
   }, [newBand]);
   
   return (
-    <div id="main" className="row container">
-      <Sidebar props={id}/>
-      <div className="App">
-          {/* <h2 className="App">Home</h2> */}
-          {/* <div className="pics_wrapper">
-            {user.coverUrl ? 
-            <div className="cover">
-              <img src={user.coverUrl}/>
-            </div> : 
-            <div className="cover">
-              <h5>upload cover picture</h5>
-              <CoverForm user={user} />
-            </div>
-            }
-            {user.imgUrl ? 
-              <div className="id-section">
-                <div className="circle">
-                  <img src={user.imgUrl} className="profile"/>
-                </div>
-                <div className="profile-id">
-                  <h3>{user.username}</h3>
-                </div>
-              </div>
-              : 
-              <div className="id-section">
-                <div className="circle">
-                  <h5>upload profile picture</h5>
-                  <ImgForm user={user} id="formbar"/>
-                </div>
-              </div>
-              }
-          </div> */}
+      <div id="main" className="App">
           <h2 className="user_bands_container">Your Bands</h2>
           {user.member ? user.member.map((band) => {
             return (
@@ -69,7 +37,6 @@ export const Home = (props) => {
             <AddBand user={user} setNewBand={setNewBand} newBand={newBand}/>
           </div>
       </div>
-    </div>
   );
 };
 

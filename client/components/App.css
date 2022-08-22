@@ -8,12 +8,14 @@
 }
 
 .App{
-    width: 100%;
+    width: 90%;
     /* height: 100vh; */
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin-left: 18%;
+    margin-right: 10%;
 }
 
 #sidebar {
@@ -23,10 +25,6 @@
     border-right: 1px solid gray;
     text-align: center;
     position: fixed;
-}
-
-#sidebar img {
-    padding-top: 10px;
 }
 
 #sidebar section {
@@ -116,7 +114,8 @@ border-bottom: 2px solid #00aaaa;
     position: relative;
     bottom: -230px;
     text-align: center;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    font-family: "Times New Roman", Times, serif;
 }
 
 .bands_wrapper {

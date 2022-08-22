@@ -13,8 +13,7 @@ const Sidebar = (props) => {
   }, []);
   console.log(user);
   return (
-    <div id="sidebar">
-      {/* <img src="juke.svg" id="logo" /> */}
+    <div>
       <div className="pics_wrapper">
           {user.coverUrl ? 
           <div className="cover">

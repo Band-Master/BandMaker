@@ -40,11 +40,11 @@ const SingleBand = (props) => {
           <Link to={`/bands/${band.id}/addMembers`}>Add Members</Link>
           </div>
       <div className="bands_container">
-      <h1>Songs</h1>
+        <h1>Songs</h1>
         {band.songs
           ? band.songs.map((song) => {
               return (
-                <div>
+                <div className="songs_container">
                   <Link to={`/songs/${song.id}`}>{song.title}</Link> <button onClick={() => setDeleteId(song.id)}>X</button>
                 </div>
               );

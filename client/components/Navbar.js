@@ -2,18 +2,24 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../store";
+import Sidebar from "./SideBar";
 
-const Navbar = ({ handleClick, isLoggedIn }) => (
-  <div id="navbar"className="row">
-   <h1 id="navbar"className="row">Band-Maker</h1>
-    <nav id="navbar"className="row">
+const Navbar = ({ handleClick, isLoggedIn, id }) => (
+  <div id="sidebar">
+    <nav id="sidebar">
+      <h1>Band-Maker</h1>
       {isLoggedIn ? (
-        <div>
+        <div >
           {/* The navbar will show these links after you log in */}
+          <Sidebar props={id}/>
+          <div className="nav_container">
           <Link to="/home">Home</Link>
+          </div>
+          <div className="nav_container">
           <a href="#" onClick={handleClick}>
             Logout
           </a>
+          </div>
         </div>
       ) : (
         <div>
@@ -33,6 +39,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
 const mapState = (state) => {
   return {
     isLoggedIn: !!state.auth.id,
+    id: state.auth.id
   };
 };
 
