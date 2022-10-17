@@ -8,6 +8,7 @@ const Band = require("./models/Band");
 const Composition = require("./models/Composition");
 const Song = require("./models/Song");
 const Part = require("./models/Part");
+const Tour = require("./models/Tour");
 const Line = require("./models/Line");
 const User_Bands = require("./models/User_Bands");
 
@@ -20,6 +21,9 @@ User.hasMany(ModelSong);
 
 Band.hasMany(Song);
 Song.belongsTo(Band);
+
+Band.hasMany(Tour);
+Tour.belongsTo(Band);
 
 Song.hasMany(Part);
 Part.belongsTo(Song);

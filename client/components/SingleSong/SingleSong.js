@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useStopwatch } from 'react-timer-hook';
-import { fetchSongThunk } from "../store/singleSong";
+import { fetchSongThunk } from "../../store/singleSong";
 import PartPlayBack from "./PartPlayBack";
 import {BsFillPlayCircleFill, BsFillPauseCircleFill, BsFillReplyFill} from 'react-icons/bs';
-import PartForm from './PartForm';
+import PartForm from '../PartForm';
 import { Link } from "react-router-dom";
 
 
@@ -56,14 +56,14 @@ const SingleSong = (props) => {
   }, [audio]);
 
   return (
-    <div className="songs_container">
+    <div className="App">
       <div style={{fontSize: '60px'}}>{song.song.title}</div>
       <ul className="loi">
         <Link to={`/bands/${band.id}`} style={{fontSize: '20px', color: 'white'}}>Back</Link>
         {duration ?
           <div className='song_container'>
             <div style={{fontSize: '30px'}}>
-              <p>main</p>
+              main
             </div>
             <div className="navigation">
               <div className="navigation_wrapper" onClick={checkWidth} ref={clickRef}>
@@ -79,12 +79,13 @@ const SingleSong = (props) => {
             </div>
           </div>
          : null}
-        </ul>
-      <ul className="loi">
-        {parts.length
-          ? parts.map((part) => <PartPlayBack part={part} key={part.id} isRunning={isRunning} seconds={totalSeconds} duration={duration} setDuration={setDuration} />) 
-          : null}
-        {song ? <PartForm setSubmit={setSubmit} submit={submit} /> : null}
+           <div className='song_container'>
+         {parts.length
+           ? 
+           parts.map((part) => <PartPlayBack part={part} key={part.id} isRunning={isRunning} seconds={totalSeconds} duration={duration} setDuration={setDuration} />) 
+           : null}
+           </div>
+         {song ? <PartForm setSubmit={setSubmit} submit={submit} /> : null}
       </ul>
     </div>
   );

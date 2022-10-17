@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { connect } from "react-redux";
-import { fetchUserThunk } from "../store/singleUser";
+import { fetchUserThunk } from "../../store/singleUser";
 import { Link } from "react-router-dom";
 // import ImgForm from "./ImgForm";
 // import CoverForm from './CoverForm';
-import AddBand from "./AddBand";
+import AddBand from "../AddBand";
 
 /**
  * COMPONENT
@@ -22,7 +22,8 @@ export const Home = (props) => {
   
   return (
       <div id="main" className="App">
-          <h2 className="user_bands_container">Your Bands</h2>
+          <h2 className="songs_container">Your Bands</h2>
+          <div className="user_bands_container">
           {user.member ? user.member.map((band) => {
             return (
               <div key={band.id} className="bands_wrapper">
@@ -32,7 +33,6 @@ export const Home = (props) => {
             );
           })
           : null}
-          <div className="user_bands_container">
             <h2>Create Band</h2>
             <AddBand user={user} setNewBand={setNewBand} newBand={newBand}/>
           </div>

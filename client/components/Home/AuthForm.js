@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {authenticate} from '../store'
+import {authenticate} from '../../store'
 
 /**
  * COMPONENT
@@ -9,7 +9,7 @@ const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
   return (
-    <div>
+    <div id="main" className="App">
       <form onSubmit={handleSubmit} name={name}>
         <div>
           <label htmlFor="username">

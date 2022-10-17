@@ -2,6 +2,7 @@ const router = require("express").Router();
 const {
   models: { Song, Band, Part, User_Bands },
 } = require("../db");
+const Tour = require("../db/models/Tour");
 const User = require("../db/models/User");
 
 // "get all bands" /bands
@@ -23,7 +24,7 @@ router.get("/:bandId", async (req, res, next) => {
       where: {
         id: req.params.bandId,
       },
-      include: [Song, { model: Part, include: [User] }, { model: User }],
+      include: [Song, { model: Part, include: [User] }, { model: User }, Tour],
     });
     res.json(band);
   } catch (err) {

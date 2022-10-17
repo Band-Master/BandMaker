@@ -1,5 +1,5 @@
-import './App.css';
-import PartPlayer from './Player/PartPlayer.jsx';
+import '../../public/App.css';
+import PartPlayer from '../Player/PartPlayer.jsx';
 import React,{ useRef, useState, useEffect } from 'react';
 
 const PartPlayBack = ({part, isRunning, seconds, duration, setDuration }) => {

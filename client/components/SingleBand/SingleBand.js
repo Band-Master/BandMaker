@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchBandThunk } from "../store/singleBand";
+import {AiOutlineDelete} from "react-icons/bs"
+import { fetchBandThunk } from "../../store/singleBand";
 import { Link } from "react-router-dom";
-import { deleteSongThunk } from "../store/singleSong";
-import AddSong from "./AddSong";
+import { deleteSongThunk } from "../../store/singleSong";
+import AddSong from "../AddSong";
 
 const SingleBand = (props) => {
   const band = useSelector((state) => state.band);
@@ -39,12 +40,12 @@ const SingleBand = (props) => {
           : null}
           <Link to={`/bands/${band.id}/addMembers`}>Add Members</Link>
           </div>
-      <div className="bands_container">
+      <div className="songs_container">
         <h1>Songs</h1>
         {band.songs
           ? band.songs.map((song) => {
               return (
-                <div className="songs_container">
+                <div>
                   <Link to={`/songs/${song.id}`}>{song.title}</Link> <button onClick={() => setDeleteId(song.id)}>X</button>
                 </div>
               );

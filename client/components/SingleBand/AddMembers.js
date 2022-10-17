@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import Link from "react-router-dom/Link";
-import { setMemberThunk } from '../store/singleBand';
-import { fetchAllUsersThunk } from '../store/allUsers';
+import { setMemberThunk } from '../../store/singleBand';
+import { fetchAllUsersThunk } from '../../store/allUsers';
 // need all users, send single userId and bandId in add member thunk 
 
 const AddMembers = () => {
