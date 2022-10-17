@@ -1,27 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { connect } from "react-redux";
-import { fetchUserThunk } from "../store/singleUser";
-import { Link } from "react-router-dom";
-import ImgForm from "./ImgForm";
+import React, { useEffect } from "react";
+import ImgForm from "../ImgForm";
 import CoverForm from './CoverForm';
+import { fetchUserThunk } from "../../store/singleUser";
+import { useDispatch, useSelector } from "react-redux";
 
-/**
- * COMPONENT
- */
-export const Home = (props) => {
+const Sidebar = (props) => {
   const { id } = props;
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(fetchUserThunk(id));
   }, []);
-  
+  console.log(user);
   return (
-    <div className="App">
-        {/* <h2 className="App">Home</h2> */}
-        <div className="pics_wrapper">
+    <div>
+      <div className="pics_wrapper">
           {user.coverUrl ? 
           <div className="cover">
             <img src={user.coverUrl}/>
@@ -49,30 +42,9 @@ export const Home = (props) => {
             </div>
             }
         </div>
-        <h2 className="user_bands_container">Your Bands</h2>
-        {user.member ? user.member.map((band) => {
-          return (
-            <div key={band.id} className="bands_wrapper">
-              <Link to={`/bands/${band.id}`}>{band.name}</Link>
-              <h4>Bio: {band.bio}</h4>
-            </div>
-          );
-        })
-        : null}
-        <div className="user_bands_container">
-        <Link to={`/addBand`}>Create Band</Link>
-        </div>
+        
     </div>
   );
 };
 
-/**
- * CONTAINER
- */
-const mapState = (state) => {
-  return {
-    id: state.auth.id,
-  };
-};
-
-export default connect(mapState)(Home);
+export default Sidebar;

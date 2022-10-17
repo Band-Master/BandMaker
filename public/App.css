@@ -8,12 +8,14 @@
 }
 
 .App{
-    width: 100%;
+    width: 90%;
     /* height: 100vh; */
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin-left: 18%;
+    margin-right: 10%;
 }
 
 #sidebar {
@@ -23,6 +25,20 @@
     border-right: 1px solid gray;
     text-align: center;
     position: fixed;
+}
+
+#sidebar section {
+text-align: left;
+padding-left: 10px;
+}
+
+#sidebar a {
+transition: border 0.2s ease;
+cursor: pointer;
+}
+
+#sidebar a:hover {
+border-bottom: 2px solid #00aaaa;
 }
 
 #center {
@@ -98,7 +114,8 @@
     position: relative;
     bottom: -230px;
     text-align: center;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    font-family: "Times New Roman", Times, serif;
 }
 
 .bands_wrapper {

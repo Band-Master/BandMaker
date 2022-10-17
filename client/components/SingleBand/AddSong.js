@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { addSongThunk } from "../store/singleSong";
 import Link from "react-router-dom/Link";
 
-const AddSong = (props) => {
+const AddSong = ({bandId, deleted, setDeleted}) => {
     const [bpm, setBpm] = useState(0);
     const [title, setTitle] = useState(``);
     const [song, setSong] = useState(null)
@@ -12,6 +12,7 @@ const AddSong = (props) => {
     useEffect(() => {
         if(song) {
             dispatch(addSongThunk(song))
+            setDeleted(!deleted);
         }
     }, [song]);
 
@@ -26,7 +27,7 @@ const AddSong = (props) => {
         setSong({
             title: title,
             bpm: bpm,
-            bandId: props.match.params.bandId
+            bandId: bandId
         })
     }
     return (
@@ -36,7 +37,7 @@ const AddSong = (props) => {
                 <input type="number" value={bpm} placeholder='tempo' onChange={handleBpm}/>
                 <button className='btn_action pp'>Submit</button>
             </form>
-            <Link className='action_btns'to={`/bands/${props.match.params.bandId}`}>Back</Link>
+            {/* <Link className='action_btns'to={`/bands/${props.match.params.bandId}`}>Back</Link> */}
         </div>
     );
 };

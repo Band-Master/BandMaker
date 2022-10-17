@@ -3,11 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import Link from "react-router-dom/Link";
 import { addBandThunk } from '../store/singleBand';
 
-const AddBand = () => {
+const AddBand = ({user, newBand, setNewBand}) => {
     const [name, setName] = useState(``); 
     const [bio, setBio] = useState(``);
     const [band, setBand] = useState(null);
-    const user = useSelector((state) => state.user)
 
     const onSubmit = (e) => {
       console.log(e)
@@ -16,6 +15,7 @@ const AddBand = () => {
         bio: bio,
         user: user
       })
+      setNewBand(!newBand);
     }
     const handleName = (e) => {
         setName(e.target.value);
@@ -39,7 +39,7 @@ const AddBand = () => {
                 <input type="text" value={bio} placeholder='Bio' onChange={handleBio}/>
                 <button className='btn_action pp'>Submit</button>
             </form>
-            <Link to="/home">Back</Link>
+            {/* <Link to="/home">Back</Link> */}
         </div>
     );
 };
