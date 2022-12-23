@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import ImgForm from "../ImgForm";
+import ImgForm from "./ImgForm";
 import CoverForm from './CoverForm';
 import { fetchUserThunk } from "../../store/singleUser";
 import { useDispatch, useSelector } from "react-redux";

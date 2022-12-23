@@ -4,7 +4,7 @@ import { useStopwatch } from 'react-timer-hook';
 import { fetchSongThunk } from "../../store/singleSong";
 import PartPlayBack from "./PartPlayBack";
 import {BsFillPlayCircleFill, BsFillPauseCircleFill, BsFillReplyFill} from 'react-icons/bs';
-import PartForm from '../PartForm';
+import PartForm from './PartForm';
 import { Link } from "react-router-dom";
 
 

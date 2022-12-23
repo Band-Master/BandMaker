@@ -4,7 +4,7 @@ import {AiOutlineDelete} from "react-icons/bs"
 import { fetchBandThunk } from "../../store/singleBand";
 import { Link } from "react-router-dom";
 import { deleteSongThunk } from "../../store/singleSong";
-import AddSong from "../AddSong";
+import AddSong from "./AddSong";
 
 const SingleBand = (props) => {
   const band = useSelector((state) => state.band);

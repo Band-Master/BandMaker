@@ -1,4 +1,4 @@
-import '../../public/App.css';
+// import '../../public/App.css';
 import PartPlayer from '../Player/PartPlayer.jsx';
 import React,{ useRef, useState, useEffect } from 'react';
 

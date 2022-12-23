@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { baseApp } from '../base';
+import { baseApp } from '../../base';
 import 'firebase/firestore';
-import { addPartThunk } from '../store/singleSong';
+import { addPartThunk } from '../../store/singleSong';
 import {BsPlusLg} from 'react-icons/bs'
 
 const PartForm = ({ setSubmit, submit }) => {

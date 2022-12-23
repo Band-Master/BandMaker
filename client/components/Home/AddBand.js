@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import Link from "react-router-dom/Link";
-import { addBandThunk } from '../store/singleBand';
+import { addBandThunk } from '../../store/singleBand';
 
 const AddBand = ({user, newBand, setNewBand}) => {
     const [name, setName] = useState(``); 

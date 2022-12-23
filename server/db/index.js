@@ -44,6 +44,7 @@ module.exports = {
     Song,
     Part,
     Line,
-    User_Bands
+    User_Bands,
+    Tour
   },
 };

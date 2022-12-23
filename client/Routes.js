@@ -1,14 +1,14 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { withRouter, Route, Switch, Redirect } from "react-router-dom";
-import { Login, Signup } from "./components/AuthForm";
+import { Login, Signup } from "./components/Home/AuthForm";
 import Home from "./components/Home";
 import { me } from "./store";
-import SingleBand from "./components/SingleBand";
-import SingleSong from "./components/SingleSong";
-import AddBand from "./components/AddBand";
-import AddMembers from "./components/AddMembers";
-import AddSong from "./components/AddSong";
+import SingleBand from "./components/SingleBand/SingleBand";
+import SingleSong from "./components/SingleSong/SingleSong";
+import AddBand from "./components/Home/AddBand";
+import AddMembers from "./components/SingleBand/AddMembers";
+import AddSong from "./components/SingleBand/AddSong";
 
 /**
  * COMPONENT

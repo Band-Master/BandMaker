@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { useDispatch } from "react-redux";
-import { addSongThunk } from "../store/singleSong";
+import { addSongThunk } from "../../store/singleSong";
 import Link from "react-router-dom/Link";
 
 const AddSong = ({bandId, deleted, setDeleted}) => {

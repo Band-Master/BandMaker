@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import { useDispatch } from "react-redux";
-import { baseApp } from '../base';
+import { baseApp } from '../../base';
 import 'firebase/firestore';
-import { updateUserThunk } from '../store/singleUser';
+import { updateUserThunk } from '../../store/singleUser';
 
 const ImgForm = ({ user }) => {
     const [imgUrl, setImgUrl] = useState(null);
